@@ -272,7 +272,9 @@
       "data": "2026-11-02",
       "descricaoProblema": "Manutenção preventiva do sistema de refrigeração.",
       "observacao": "Programada limpeza das ventoinhas e inspeção térmica.",
-      "status": "Aberta"
+      "status": "Em Análise",
+      "prioridade": "Média",
+      "solicitante": "Miguel"
     },
     {
       "id": "8",
@@ -293,6 +295,32 @@
       "solicitante": "Chefe",
       "status": "Aberta",
       "id": "1d0Hqgmb4Uo"
+    }
+  ],
+  "tarefas": [
+    {
+      "id": "1",
+      "manutencaoId": 1,
+      "descricao": "Verificar os roletes da impressora.",
+      "dataCriacao": "2026-11-04"
+    },
+    {
+      "id": "2",
+      "manutencaoId": 1,
+      "descricao": "Realizar limpeza interna do equipamento.",
+      "dataCriacao": "2026-11-04"
+    },
+    {
+      "id": "3",
+      "manutencaoId": 1,
+      "descricao": "Realizar teste de impressão.",
+      "dataCriacao": "2026-11-04"
+    },
+    {
+      "manutencaoId": 7,
+      "descricao": "Verificando integridade do equipamento.",
+      "dataCriacao": "2026-11-04",
+      "id": "tEMCY25Pdes"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

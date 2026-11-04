@@ -26,9 +26,13 @@ import FornecedorEditar from './paginas/FornecedorEditar.jsx'
 
 import Manutencoes from './paginas/Manutencoes.jsx'
 import ManutencaoNova from './paginas/ManutencaoNova.jsx'
+import ManutencaoDetalhes from './paginas/ManutencaoDetalhes.jsx'
+import ManutencaoEditar from './paginas/ManutencaoEditar.jsx'
+import Analytics from './paginas/Analytics.jsx'
 
 
 import Login from './paginas/Login.jsx'
+import Configuracoes from './paginas/Configuracoes.jsx'
 
 
 
@@ -76,6 +80,16 @@ const router = createBrowserRouter([
   {path: "/manutencoes", element: <Manutencoes />},
     // Rota para a página para adicionar manutencao
   {path: "/manutencao/nova", element: <ManutencaoNova />},
+  // Rota para a página para Detahles de Manutenção
+  {path: "/manutencoes/:id", element: <ManutencaoDetalhes />},
+    //Rota para a página para editar manutenção
+  {path: "/manutencoes/:id/editar", element: <ManutencaoEditar />},
+
+  // Rota para a página de Analytics
+  {path: "/analytics", element: <Analytics />},
+
+  // Rota para a página de Configurações
+  { path: '/configuracoes', element: <Configuracoes /> },
 
 
 ]);

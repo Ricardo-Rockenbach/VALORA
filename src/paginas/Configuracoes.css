@@ -1,0 +1,202 @@
+.conf-conteudo {
+  color: #4f2d17;
+}
+
+.conf-cabecalho {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 28px;
+}
+
+.conf-cabecalho .dash-titulo {
+  margin: 5px 0 8px;
+}
+
+.conf-cabecalho p,
+.conf-secao-cabecalho p {
+  color: #806b5c;
+  font-size: 0.98rem;
+  line-height: 1.6;
+}
+
+.conf-sobretitulo {
+  color: #b94b0b;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+}
+
+.conf-etiqueta,
+.conf-status-planejamento {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  padding: 8px 12px;
+  border: 1px solid #efd2bd;
+  border-radius: 999px;
+  background: #fff7f0;
+  color: #91400b;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.conf-apresentacao {
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+  padding: 24px;
+  margin-bottom: 32px;
+  border: 1px solid #f0dfd1;
+  border-radius: 14px;
+  background: #fffaf6;
+}
+
+.conf-apresentacao-icone,
+.conf-card-icone {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 52px;
+  height: 52px;
+  border-radius: 12px;
+  background: #fbe8d9;
+  color: #b94b0b;
+}
+
+.conf-card-icone-svg {
+  width: 27px;
+  height: 27px;
+}
+
+.conf-apresentacao h3 {
+  margin: 1px 0 7px;
+  color: #542f17;
+  font-size: 1.15rem;
+}
+
+.conf-apresentacao p {
+  max-width: 850px;
+  color: #806b5c;
+  font-size: 0.94rem;
+  line-height: 1.65;
+}
+
+.conf-secao-cabecalho {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.conf-secao-cabecalho h3 {
+  margin-bottom: 5px;
+  color: #542f17;
+  font-size: 1.25rem;
+}
+
+.conf-grade {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.conf-card {
+  display: flex;
+  min-height: 270px;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 22px;
+  border: 1px solid #eadfd7;
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: 0 3px 12px rgba(76, 43, 20, 0.045);
+}
+
+.conf-card h4 {
+  margin: 17px 0 8px;
+  color: #542f17;
+  font-size: 1.04rem;
+  line-height: 1.4;
+}
+
+.conf-card > p {
+  color: #806b5c;
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.conf-card-detalhe {
+  width: 100%;
+  padding-top: 15px;
+  margin-top: auto;
+}
+
+.conf-card-detalhe span {
+  display: block;
+  margin-bottom: 5px;
+  color: #b45a25;
+  font-size: 0.67rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+}
+
+.conf-card-detalhe p {
+  color: #6f5a4b;
+  font-size: 0.82rem;
+  line-height: 1.5;
+}
+
+.conf-card-status {
+  display: inline-block;
+  margin-top: 14px;
+  color: #987e6b;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.conf-aviso {
+  padding: 17px 20px;
+  margin-top: 24px;
+  border-left: 4px solid #c84b00;
+  border-radius: 8px;
+  background: #fff5ec;
+}
+
+.conf-aviso strong {
+  display: block;
+  margin-bottom: 5px;
+  color: #783708;
+  font-size: 0.9rem;
+}
+
+.conf-aviso p {
+  color: #806b5c;
+  font-size: 0.87rem;
+  line-height: 1.6;
+}
+
+@media (max-width: 1100px) {
+  .conf-grade {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 760px) {
+  .conf-cabecalho,
+  .conf-secao-cabecalho {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .conf-grade {
+    grid-template-columns: 1fr;
+  }
+
+  .conf-apresentacao {
+    padding: 18px;
+  }
+}

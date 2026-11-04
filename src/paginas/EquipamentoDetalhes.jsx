@@ -9,6 +9,7 @@ import { listarSetores } from '../servicos/setorServico'
 import { listarLocalizacoes } from '../servicos/localizacaoServico'
 import { listarFornecedores } from '../servicos/fornecedorServico'
 import { listarManutencoes } from '../servicos/manutencaoServico'
+import { calcularSaudeEquipamento } from '../servicos/pontuacaoServico'
 
 import './Home.css'
 import './EquipamentoDetalhes.css'
@@ -59,6 +60,24 @@ function normalizarStatus(status) {
   }
 
   return status || 'Não informado'
+}
+
+function classeClassificacaoSaude(classificacao) {
+  const valor = (classificacao || '').toLowerCase()
+
+  if (valor === 'excelente') return 'det-score--excelente'
+  if (valor === 'boa') return 'det-score--boa'
+  if (valor === 'atenção' || valor === 'atencao') return 'det-score--atencao'
+
+  return 'det-score--critica'
+}
+
+function formatarPontos(valor) {
+  const pontos = Number(valor || 0)
+  const sinal = pontos > 0 ? '+' : ''
+  return `${sinal}${pontos.toLocaleString('pt-BR', {
+    maximumFractionDigits: 2,
+  })} pts`
 }
 
 function IconeEquipamento({ equipamento }) {
@@ -261,6 +280,13 @@ export default function EquipamentoDetalhes() {
     }
   }, [manutencoes])
 
+  // O Score é calculado a partir do equipamento e de seu histórico atual.
+  // Assim, qualquer manutenção registrada passa a refletir no resultado.
+  const resumoScore = useMemo(
+    () => calcularSaudeEquipamento(equipamento, manutencoes),
+    [equipamento, manutencoes]
+  )
+
   function classeStatus(status) {
     const valor = (status || '').toLowerCase()
 
@@ -304,6 +330,9 @@ export default function EquipamentoDetalhes() {
   }
 
   const statusEquipamento = equipamento.status || 'Não informado'
+  const pontuacaoAntesDosLimites = Number(
+    (100 + resumoScore.pontosPositivos - resumoScore.pontosNegativos).toFixed(2)
+  )
 
   return (
     <div className="dash">
@@ -507,6 +536,151 @@ export default function EquipamentoDetalhes() {
           {/* Visão geral */}
           {abaAtiva === 'visao-geral' && (
             <div className="det-saude-conteudo">
+
+              {/* Score de saúde calculado pelo serviço pontuacaoServico.js */}
+              <section className={`det-score-painel ${classeClassificacaoSaude(resumoScore.classificacao)}`}>
+                <div className="det-score-cabecalho">
+                  <div>
+                    <span className="det-score-sobretitulo">INDICADOR CALCULADO</span>
+                    <h3>Pontuação de saúde</h3>
+                    <p>
+                      O resultado considera os impactos das manutenções registradas
+                      para este equipamento.
+                    </p>
+                  </div>
+                  <span className="det-score-classificacao">
+                    {resumoScore.classificacao}
+                  </span>
+                </div>
+
+                <div className="det-score-corpo">
+                  <div
+                    className="det-score-circulo"
+                    style={{ '--score-percentual': `${resumoScore.pontuacao}%` }}
+                    role="img"
+                    aria-label={`Pontuação ${resumoScore.pontuacao} de 100: ${resumoScore.classificacao}`}
+                  >
+                    <div>
+                      <strong>{resumoScore.pontuacao}</strong>
+                      <span>/ 100</span>
+                    </div>
+                  </div>
+
+                  <div className="det-score-resumo">
+                    <div className="det-score-metrica">
+                      <span>Base inicial</span>
+                      <strong>100 pts</strong>
+                    </div>
+                    <div className="det-score-metrica positivo">
+                      <span>Bônus positivos aplicados</span>
+                      <strong>{formatarPontos(resumoScore.pontosPositivos)}</strong>
+                    </div>
+                    <div className="det-score-metrica negativo">
+                      <span>Penalizações acumuladas</span>
+                      <strong>{formatarPontos(-resumoScore.pontosNegativos)}</strong>
+                    </div>
+                    <div className="det-score-formula">
+                      <span>Fórmula utilizada</span>
+                      <strong>
+                        100 + {Number(resumoScore.pontosPositivos).toLocaleString('pt-BR')}
+                        {' - '}
+                        {Number(resumoScore.pontosNegativos).toLocaleString('pt-BR')}
+                        {' = '}
+                        {pontuacaoAntesDosLimites.toLocaleString('pt-BR')} pontos
+                      </strong>
+                      <small>
+                        Após arredondamento e aplicação dos limites de 0 a 100, o Score final é {resumoScore.pontuacao}.
+                        O bônus positivo acumulado é limitado a 15 pontos.
+                      </small>
+                    </div>
+                  </div>
+                </div>
+
+                {resumoScore.pontosPositivosBrutos > resumoScore.pontosPositivos && (
+                  <p className="det-score-observacao">
+                    Foram identificados {resumoScore.pontosPositivosBrutos} pontos positivos,
+                    mas somente {resumoScore.pontosPositivos} foram aplicados devido ao limite
+                    de bônus do modelo.
+                  </p>
+                )}
+              </section>
+
+              <section className="det-score-detalhamento">
+                <div className="det-score-detalhamento-cabecalho">
+                  <div>
+                    <h3>Como cada manutenção afetou a saúde</h3>
+                    <p>Impacto individual calculado conforme tipo, prioridade e situação.</p>
+                  </div>
+                  <span>{resumoScore.totalManutencoes} registros</span>
+                </div>
+
+                {resumoScore.detalhamento.length === 0 ? (
+                  <div className="det-score-vazio">
+                    <strong>Sem impactos registrados</strong>
+                    <p>O equipamento permanece com 100 pontos até que existam manutenções que alterem sua saúde.</p>
+                  </div>
+                ) : (
+                  <div className="det-score-lista">
+                    {resumoScore.detalhamento.map((item, indice) => {
+                      const manutencaoOriginal = manutencoes.find(
+                        (manutencao) => String(manutencao.id) === String(item.manutencaoId)
+                      )
+
+                      return (
+                        <article className="det-score-item" key={item.manutencaoId ?? indice}>
+                          <div className="det-score-item-principal">
+                            <div>
+                              <strong>{item.tipo}</strong>
+                              <span>
+                                {formatarData(manutencaoOriginal?.data)} · Prioridade: {item.prioridade}
+                              </span>
+                            </div>
+                            <strong className={`det-score-impacto ${item.pontos > 0 ? 'positivo' : item.pontos < 0 ? 'negativo' : 'neutro'}`}>
+                              {formatarPontos(item.pontos)}
+                            </strong>
+                          </div>
+                          <div className="det-score-item-rodape">
+                            <span>Status: {item.status}</span>
+                            <p>{item.motivo}</p>
+                          </div>
+                        </article>
+                      )
+                    })}
+                  </div>
+                )}
+              </section>
+
+              <details className="det-score-regras">
+                <summary>Consultar regras e pesos utilizados no cálculo</summary>
+                <div className="det-score-regras-grade">
+                  <article>
+                    <strong>Manutenção corretiva</strong>
+                    <p>Aberta: -10 / -20 / -30 pontos conforme prioridade baixa, média ou alta.</p>
+                    <p>Em andamento: aplica 60% da penalização. Concluída: mantém 20% como histórico da falha.</p>
+                  </article>
+                  <article>
+                    <strong>Manutenção preventiva</strong>
+                    <p>Aberta: 0 ponto. Em andamento: +2 pontos. Concluída: +6 pontos.</p>
+                    <p>O bônus é aplicado quando a ação está em andamento ou concluída.</p>
+                  </article>
+                  <article>
+                    <strong>Troca de peça</strong>
+                    <p>Aberta: -5 / -9 / -14 pontos conforme prioridade baixa, média ou alta.</p>
+                    <p>Em andamento: aplica 60% da penalização. Concluída: +5 pontos.</p>
+                  </article>
+                  <article>
+                    <strong>Atualização</strong>
+                    <p>Aberta: 0 ponto. Em andamento: +1 ponto. Concluída: +3 pontos.</p>
+                  </article>
+                </div>
+                <p className="det-score-regras-observacao">
+                  O cálculo começa em 100 pontos. Os bônus positivos são limitados a 15 pontos
+                  no total, e o resultado final fica entre 0 e 100. Registros sem prioridade
+                  recebem prioridade média; status ausente ou desconhecido é tratado como aberto.
+                  “Em análise” e “Aguardando peça” mantêm a penalização integral nas ações corretivas
+                  e trocas pendentes.
+                </p>
+              </details>
 
               <div className="det-saude-resumo">
                 <div className="det-card det-saude-principal">

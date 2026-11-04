@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
-import Sidebar from '../componentes/Sidebar'
+import Sidebar from '../componentes/sidebar'
 import { listarSetores, cadastrarSetor } from '../servicos/setorServico'
 import { listarLocalizacoes } from '../servicos/localizacaoServico'
 import './Home.css' // layout e sidebar compartilhados (o mesmo CSS do Equipamentos.jsx)
@@ -180,8 +180,8 @@ export default function Localizacoes() {
               <tr>
                 <th>ID</th>
                 <th>Nome</th>
-                <th>Descrição</th>
                 <th>Setor</th>
+                <th>Descrição</th>
                 <th>Status</th>
                 <th aria-label="Ações" />
               </tr>

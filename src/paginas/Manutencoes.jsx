@@ -1,7 +1,7 @@
 
 import { useEffect, useMemo, useState } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
-import Sidebar from '../componentes/Sidebar'
+import Sidebar from '../componentes/sidebar'
 import { listarManutencoes } from '../servicos/manutencaoServico'
 import { listarEquipamentos } from '../servicos/equipamentoServico'
 import './Home.css'
@@ -382,7 +382,7 @@ export default function Manutencoes() {
 
                         <td className="mt-coluna-acao">
                           <Link
-                            to={`/manutencao/${m.id}`}
+                            to={`/manutencoes/${m.id}`}
                             className="dash-ver-detalhes"
                           >
                             Ver Detalhes

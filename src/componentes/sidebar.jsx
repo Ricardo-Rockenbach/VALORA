@@ -20,7 +20,7 @@ const menu = [
     ],
   },
   { rotulo: 'Manutenção', para: '/manutencoes' },
-  { rotulo: 'Analytics' },
+  { rotulo: 'Analytics', para: '/analytics' },
   {
     rotulo: 'Sistema',
     filhos: [{ rotulo: 'Configurações', para: '/configuracoes' }],
@@ -59,7 +59,7 @@ const IconeSeta = () => (
   </Svg>
 )
 
-export default function Sidebar({ ativo, abertoInicial = null, nomeUsuario = 'usuário' }) {
+export default function Sidebar({ ativo, abertoInicial = null, nomeUsuario = 'Pablo' }) {
   const [aberto, setAberto] = useState(abertoInicial)
 
   return (
