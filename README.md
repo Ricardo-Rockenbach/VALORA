@@ -1,16 +1,105 @@
-# React + Vite
+# VALORA
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+Sistema de gestão e acompanhamento da saúde de equipamentos, desenvolvido como projeto da disciplina **Gestão Ágil de Projetos**.
 
-Currently, two official plugins are available:
+O VALORA reúne informações dos ativos em um só lugar, permitindo consultar equipamentos, acompanhar indicadores e registrar manutenções.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Objetivo
 
-## React Compiler
+Facilitar o acompanhamento do estado dos equipamentos e do histórico de intervenções, apoiando uma gestão mais organizada e baseada em indicadores.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Funcionalidades do MVP
 
-## Expanding the Oxlint configuration
+- Dashboard com visão geral dos equipamentos e indicadores.
+- Consulta e listagem de equipamentos.
+- Visualização dos detalhes de cada ativo.
+- Pontuação de saúde do equipamento.
+- Histórico de manutenções.
+- Registro de novas manutenções e intervenções.
+- Atualização dos indicadores conforme as regras do MVP.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+## Tecnologias
+
+- React
+- Vite
+- React Router
+- Tailwind CSS
+- JSON Server — API simulada para desenvolvimento
+
+## Como executar
+
+### Pré-requisitos
+
+- Node.js e npm instalados.
+- Git instalado.
+
+### 1. Clonar o repositório
+
+```bash
+git clone https://github.com/Ricardo-Rockenbach/VALORA.git
+cd VALORA
+```
+
+### 2. Instalar as dependências
+
+```bash
+npm install
+```
+
+### 3. Iniciar a API simulada
+
+Em um terminal, execute:
+
+```bash
+npm run server
+```
+
+A API ficará disponível em:
+
+```text
+http://localhost:3000
+```
+
+### 4. Iniciar a aplicação
+
+Em outro terminal, dentro da pasta do projeto:
+
+```bash
+npm run dev
+```
+
+O Vite exibirá o endereço local da aplicação — normalmente:
+
+```text
+http://localhost:5173
+```
+
+## Scripts disponíveis
+
+| Comando | Descrição |
+|---|---|
+| `npm run dev` | Inicia o ambiente de desenvolvimento |
+| `npm run server` | Inicia a API simulada com JSON Server |
+| `npm run build` | Gera a versão de produção |
+| `npm run preview` | Executa uma prévia da build |
+| `npm run lint` | Executa a análise estática do código |
+
+## Estrutura do projeto
+
+```text
+VALORA/
+├── VALORA-API-FAKE/   # Dados e API simulada
+├── public/            # Arquivos públicos
+├── src/               # Código da aplicação React
+├── index.html
+├── package.json
+└── vite.config.js
+```
+
+## Status
+
+Projeto acadêmico em desenvolvimento. O escopo atual está concentrado na entrega do MVP e na demonstração do fluxo principal de gestão dos equipamentos.
+
+## Equipe
+
+Projeto desenvolvido para a disciplina **Gestão Ágil de Projetos**.
