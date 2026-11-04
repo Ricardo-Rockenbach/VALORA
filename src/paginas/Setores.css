@@ -1,0 +1,246 @@
+/* Estilos exclusivos da tela Setores (prefixo "st-").
+   O layout e a sidebar vêm do mesmo CSS compartilhado das outras telas. */
+
+/* ---------- Barra de busca + botão ---------- */
+.st-barra {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 36px;
+}
+
+.st-busca {
+  display: block;
+  width: 100%;
+  max-width: 300px;
+}
+
+.st-busca input {
+  width: 100%;
+  height: 44px;
+  padding: 0 14px;
+  border: 1px solid var(--marrom-menu);
+  border-radius: 8px;
+  outline: 0;
+  background: #fff;
+  color: var(--marrom);
+  font: inherit;
+  font-size: 0.9rem;
+  font-style: italic;
+}
+
+.st-busca input::placeholder {
+  color: #8a8a8a;
+  font-weight: 700;
+}
+
+.st-busca input:focus {
+  border-color: var(--laranja);
+  box-shadow: 0 0 0 2px rgba(200, 75, 0, 0.2);
+}
+
+/* Mesmo estilo do botão "Adicionar" das outras telas */
+.st-adicionar {
+  padding: 14px 44px;
+  border: 0;
+  border-radius: 10px;
+  background: var(--laranja);
+  color: #fff;
+  font: inherit;
+  font-size: 1.3rem;
+  font-weight: 800;
+  font-style: "Roboto Mono", monospace;
+  cursor: pointer;
+}
+
+.st-adicionar:hover {
+  filter: brightness(1.1);
+}
+
+/* ---------- Tabela ---------- */
+.st-tabela-caixa {
+  overflow-x: auto;
+  border: 1px solid #d9a86c;
+  border-radius: 14px;
+}
+
+.st-tabela-caixa table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+}
+
+.st-tabela-caixa th {
+  padding: 14px 16px;
+  background: #f7c896;
+  text-align: left;
+  font-size: 0.85rem;
+  font-weight: 800;
+  font-style: italic;
+  white-space: nowrap;
+}
+
+.st-tabela-caixa th:nth-child(1) { width: 8%; }
+.st-tabela-caixa th:nth-child(2) { width: 24%; }
+.st-tabela-caixa th:nth-child(3) { width: 34%; }
+.st-tabela-caixa th:nth-child(4) { width: 14%; }
+.st-tabela-caixa th:nth-child(5) { width: 20%; }
+
+.st-coluna-acao {
+  text-align: right;
+}
+
+a.dash-ver-detalhes {
+  display: inline-block;
+  text-decoration: none;
+  
+}
+
+.st-tabela-caixa td {
+  padding: 18px 16px;
+  border-top: 1px solid #b9a595;
+}
+
+.st-vazio {
+  color: #9a7a60;
+  text-align: center;
+  font-style: italic;
+}
+
+.st-status--ativo {
+  color: #1e5b32;
+  font-weight: 700;
+}
+
+.st-status--inativo {
+  color: #b3150a;
+  font-weight: 700;
+}
+
+/* ---------- Modal "Adicionar Setor" ---------- */
+.st-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  background: rgba(0, 0, 0, 0.35);
+}
+
+.st-modal {
+  width: min(430px, 100%);
+  max-height: 100%;
+  overflow-y: auto;
+  padding: 22px 26px 24px;
+  border: 1px solid #d9a86c;
+  border-radius: 14px;
+  background: #f9d7b0;
+  color: var(--marrom-menu);
+}
+
+.st-modal h3 {
+  margin: 0 0 14px;
+  font-size: 1.25rem;
+  font-style: italic;
+  font-weight: 800;
+}
+
+.st-campo {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-bottom: 14px;
+}
+
+.st-campo span {
+  font-size: 0.8rem;
+  font-weight: 800;
+  font-style: italic;
+}
+
+.st-campo input,
+.st-campo textarea,
+.st-campo select {
+  width: 100%;
+  padding: 6px 10px;
+  border: 1px solid var(--marrom-menu);
+  border-radius: 4px;
+  outline: 0;
+  background: #fff;
+  color: var(--marrom);
+  font: inherit;
+  font-size: 0.9rem;
+}
+
+.st-campo input,
+.st-campo select {
+  height: 34px;
+}
+
+.st-campo textarea {
+  min-height: 70px;
+  resize: vertical;
+}
+
+.st-campo input:focus,
+.st-campo textarea:focus,
+.st-campo select:focus {
+  border-color: var(--laranja);
+  box-shadow: 0 0 0 2px rgba(200, 75, 0, 0.2);
+}
+
+.st-campo--status select {
+  width: 140px;
+  cursor: pointer;
+}
+
+.st-modal-acoes {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  margin-top: 20px;
+}
+
+.st-cancelar,
+.st-salvar {
+  padding: 10px 22px;
+  border-radius: 18px;
+  font: inherit;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.st-cancelar {
+  border: 1px solid var(--marrom-menu);
+  background: #f9d7b0;
+  color: #111;
+}
+
+.st-cancelar:hover {
+  background: #fff1e6;
+}
+
+.st-salvar {
+  min-width: 96px;
+  border: 0;
+  background: #f7870f;
+  color: #fff;
+}
+
+.st-salvar:hover {
+  filter: brightness(1.08);
+}
+
+/* ---------- Responsivo ---------- */
+@media (max-width: 640px) {
+  .st-barra {
+    flex-wrap: wrap;
+  }
+}

@@ -1,0 +1,364 @@
+/* Estilos exclusivos da tela Nova Manutenção (prefixo "nm-").
+   O layout e a sidebar vêm do mesmo CSS compartilhado das outras telas. */
+
+.nm-conteudo {
+  background: #fff1e0;
+}
+
+.nm-form {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 340px;
+  gap: 28px 40px;
+  align-items: stretch;
+}
+
+.nm-principal {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  min-width: 0;
+}
+
+.nm-subtitulo {
+  margin: 0 0 14px;
+  color: var(--marrom-menu);
+  font-size: 1.4rem;
+  font-weight: 800;
+}
+
+/* ---------- Busca ---------- */
+.nm-busca-caixa {
+  position: relative;
+  width: 100%;
+  max-width: 520px;
+}
+
+.nm-busca {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 46px;
+  padding: 0 16px;
+  border: 1px solid var(--marrom-menu);
+  border-radius: 10px;
+  background: #fff;
+  color: var(--marrom);
+}
+
+.nm-busca input {
+  width: 100%;
+  min-width: 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: var(--marrom);
+  font: inherit;
+  font-size: 1rem;
+  font-style: italic;
+}
+.nm-busca:focus-within {
+  border-color: var(--laranja);
+  box-shadow: 0 0 0 2px rgba(200, 75, 0, 0.2);
+}
+
+.nm-busca input::placeholder {
+  color: #9b9b9b;
+}
+
+/* Lista de resultados da busca */
+.nm-resultados {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  z-index: 20;
+  max-height: 300px;
+  margin: 0;
+  padding: 6px;
+  overflow-y: auto;
+  border: 1px solid var(--marrom-menu);
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+  list-style: none;
+}
+
+.nm-resultados button {
+  display: block;
+  width: 100%;
+  padding: 10px 12px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--marrom);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.nm-resultados button:hover,
+.nm-resultados button:focus-visible {
+  background: #fff1e6;
+  outline: 0;
+}
+
+.nm-resultados strong {
+  display: block;
+  font-size: 0.95rem;
+
+}
+
+.nm-resultados small {
+  display: block;
+  margin-top: 2px;
+  color: #9a7a60;
+  font-size: 0.8rem;
+}
+
+.nm-resultados-vazio {
+  padding: 12px;
+  color: #9a7a60;
+  font-size: 0.9rem;
+  font-style: italic;
+}
+
+.nm-erro {
+  margin: 8px 0 0;
+  color: #b3150a;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+/* ---------- Card do equipamento ---------- */
+.nm-card-equipamento {
+  margin-top: 20px;
+  padding: 20px 26px 24px;
+  border-radius: 12px;
+  background: #f7c896;
+  color: var(--marrom-menu);
+}
+
+.nm-card-equipamento h4 {
+  margin: 0 0 8px;
+  font-size: 2rem;
+  font-weight: 800;
+    font-style: Roboto, sans-serif;
+}
+
+.nm-card-equipamento--oculto {
+  visibility: hidden;
+}
+
+.nm-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 32px;
+  margin: 0 0 18px;
+  font-size: 0.95rem;
+  font-weight: 700;
+    font-style: Roboto, sans-serif;
+}
+
+.nm-tags {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.nm-tag {
+  overflow: hidden;
+  border-radius: 8px;
+  background: #fff;
+  text-align: center;
+}
+
+.nm-tag-rotulo {
+  display: block;
+  padding: 4px 6px;
+  background: #f7870f;
+  color: #fff;
+  font-size: 0.8rem;
+  font-weight: 500;
+  font-style: Roboto, sans-serif;
+}
+
+.nm-tag strong {
+  display: block;
+  padding: 14px 8px;
+  font-size: 1.05rem;
+}
+
+/* ---------- Campos do formulário ---------- */
+.nm-campos {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 22px 36px;
+}
+
+.nm-rotulo {
+  color: var(--marrom-menu);
+  font-size: 0.98rem;
+  font-weight: 800;
+  font-style: Roboto, sans-serif;
+}
+
+.nm-campo input,
+.nm-campo select,
+.nm-campo textarea {
+  width: 100%;
+  min-height: 44px;
+  padding: 8px 14px;
+  border: 1px solid #c9b8a8;
+  border-radius: 8px;
+  outline: 0;
+  background: #fff;
+  color: var(--marrom);
+  font: inherit;
+  font-size: 1rem;
+}
+
+.nm-campo textarea {
+  min-height: 150px;
+  resize: vertical;
+}
+
+/* ---------- Coluna lateral ---------- */
+.nm-ultimas {
+  padding: 16px;
+  border-radius: 12px;
+  background: #f7c896;
+}
+
+.nm-ultimas h3 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 14px;
+  color: var(--marrom-menu);
+  font-size: 1.1rem;
+  font-weight: 800;
+  font-style: italic;
+}
+
+.nm-ultimas-corpo {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 14px;
+  border-radius: 10px;
+  background: #f4f4f4;
+}
+
+.nm-ultima-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 14px;
+  border-radius: 8px;
+  background: #f7c896;
+  color: var(--marrom-menu);
+}
+
+.nm-ultima-item strong {
+  font-size: 0.95rem;
+}
+
+.nm-ultima-item span {
+  font-size: 0.92rem;
+}
+
+.nm-ultima-item small {
+  font-size: 0.82rem;
+  font-weight: 700;
+  font-style: italic;
+}
+.nm-ver-todas {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  align-self: flex-end;
+  color: var(--marrom-menu);
+  font-size: 1.1rem;
+  font-weight: 800;
+  font-style: italic;
+  text-decoration: none;
+}
+
+.nm-ver-todas:hover {
+  text-decoration: underline;
+}
+
+.nm-ver-todas-seta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 9px;
+  border-radius: 5px;
+  background: #f7870f;
+  color: #fff;
+}
+
+
+/* ---------- Botões ---------- */
+.nm-lateral {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.nm-acoes {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: auto;
+}
+
+.nm-cancelar,
+.nm-salvar {
+  padding: 11px 22px;
+  border-radius: 18px;
+  font: inherit;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.nm-cancelar {
+  border: 1px solid var(--marrom-menu);
+  background: #fff;
+  color: #111;
+}
+
+.nm-cancelar:hover {
+  background: #fff1e6;
+}
+
+.nm-salvar {
+  min-width: 96px;
+  border: 0;
+  background: #f7870f;
+  color: #fff;
+}
+
+.nm-salvar:hover {
+  filter: brightness(1.08);
+}
+
+/* ---------- Responsivo ---------- */
+@media (max-width: 1000px) {
+  .nm-form {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .nm-campos {
+    grid-template-columns: 1fr;
+  }
+
+  .nm-tags {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}

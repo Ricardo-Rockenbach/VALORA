@@ -1,0 +1,299 @@
+{
+  "equipamentos": [
+    {
+      "patrimonio": "TI-00231",
+      "nome": "Notebook Dell Latitude",
+      "tipo": "Notebook",
+      "marca": "Dell",
+      "modelo": "",
+      "numeroSerie": "12345678910",
+      "setorId": 2,
+      "localizacaoId": 4,
+      "fornecedorId": null,
+      "status": "Ativo",
+      "observacao": "Notebook foi quebrado pelo usuario do financeiro",
+      "notaFiscal": "",
+      "valor": null,
+      "dataAquisicao": "",
+      "garantia": "",
+      "id": "1"
+    },
+    {
+      "id": "2",
+      "patrimonio": "IMP-0042",
+      "nome": "Impressora HP LaserJet",
+      "setorId": 3,
+      "localizacaoId": 3,
+      "tipo": "Impressora",
+      "marca": "HP",
+      "status": "Em manutenção"
+    },
+    {
+      "id": "3",
+      "patrimonio": "MON-0107",
+      "nome": "Monitor LG 24\"",
+      "setorId": 4,
+      "localizacaoId": 5,
+      "tipo": "Monitor",
+      "marca": "LG",
+      "status": "Ativo"
+    },
+    {
+      "id": "4",
+      "patrimonio": "PC-00152",
+      "nome": "Computador Lenovo ThinkCentre",
+      "setorId": 1,
+      "localizacaoId": 1,
+      "tipo": "Computador",
+      "marca": "Lenovo",
+      "status": "Em manutenção"
+    },
+    {
+      "id": "5",
+      "patrimonio": "NB-0021",
+      "nome": "Nobreak APC Back-UPS",
+      "setorId": 1,
+      "localizacaoId": 2,
+      "tipo": "Nobreak",
+      "marca": "APC",
+      "status": "Inativo"
+    },
+    {
+      "id": "6",
+      "patrimonio": "TI-00247",
+      "nome": "Notebook Acer Aspire",
+      "setorId": 5,
+      "localizacaoId": 6,
+      "tipo": "Notebook",
+      "marca": "Acer",
+      "status": "Ativo"
+    },
+    {
+      "id": "7",
+      "patrimonio": "SW-0008",
+      "nome": "Switch Cisco Catalyst",
+      "setorId": 1,
+      "localizacaoId": 2,
+      "tipo": "Rede",
+      "marca": "Cisco",
+      "status": "Ativo"
+    },
+    {
+      "id": "8",
+      "patrimonio": "IMP-0051",
+      "nome": "Impressora Epson EcoTank",
+      "setorId": 2,
+      "localizacaoId": 4,
+      "tipo": "Impressora",
+      "marca": "Epson",
+      "status": "Inativo"
+    }
+  ],
+  "setores": [
+    {
+      "id": "1",
+      "nome": "Tecnologia da Informação",
+      "descricao": "Infraestrutura e suporte de TI",
+      "status": "Ativo"
+    },
+    {
+      "id": "2",
+      "nome": "Financeiro",
+      "descricao": "Departamento financeiro",
+      "status": "Ativo"
+    },
+    {
+      "id": "3",
+      "nome": "Recursos Humanos",
+      "descricao": "Gestão de pessoas",
+      "status": "Ativo"
+    },
+    {
+      "id": "4",
+      "nome": "Compras",
+      "descricao": "Departamento de compras",
+      "status": "Ativo"
+    },
+    {
+      "id": "5",
+      "nome": "Comercial",
+      "descricao": "Departamento comercial",
+      "status": "Ativo"
+    }
+  ],
+  "localizacoes": [
+    {
+      "id": "1",
+      "nome": "Sala de TI",
+      "setorId": 1,
+      "descricao": "Infraestrutura e suporte de TI",
+      "status": "Ativo"
+    },
+    {
+      "id": "2",
+      "nome": "Sala de Servidores",
+      "setorId": 1,
+      "descricao": "Sala dos Servidores",
+      "status": "Ativo"
+    },
+    {
+      "id": "3",
+      "nome": "Recepção",
+      "setorId": 3,
+      "descricao": "Sala de recepcao",
+      "status": "Ativo"
+    },
+    {
+      "id": "4",
+      "nome": "Sala Financeira",
+      "setorId": 2,
+      "descricao": "Sala do Dinheiro",
+      "status": "Ativo"
+    },
+    {
+      "id": "5",
+      "nome": "Sala de Compras",
+      "setorId": 4,
+      "descricao": "Sala funcionaros compras",
+      "status": "Ativo"
+    },
+    {
+      "id": "6",
+      "nome": "Escritório Comercial",
+      "setorId": 5,
+      "descricao": "Sala do Comercio",
+      "status": "Ativo"
+    }
+  ],
+  "fornecedores": [
+    {
+      "id": "1",
+      "nomeFantasia": "TechSul",
+      "razaoSocial": "TechSul Comércio de Informática Ltda.",
+      "cnpj": "11222333000181",
+      "endereco": "Av. das Indústrias, 1200 - Porto Alegre/RS",
+      "telefone": "(51) 3333-4454",
+      "email": "contato@TechSul.com",
+      "descricao": "Fornecedor de computadores e equipamentos",
+      "status": "Ativo"
+    },
+    {
+      "id": "2",
+      "nomeFantasia": "InfoPeças",
+      "razaoSocial": "InfoPeças Distribuidora de Componentes S.A.",
+      "cnpj": "11.444.777/0001-61",
+      "endereco": "Rua Marechal Floriano, 85 - Pelotas/RS",
+      "telefone": "(51) 3333-4444",
+      "email": "contato@infopecas.com",
+      "descricao": "Fornecedor de computadores e equipamentos",
+      "status": "Ativo"
+    },
+    {
+      "id": "3",
+      "nomeFantasia": "Papelaria Central",
+      "razaoSocial": "Central de Suprimentos e Papelaria Ltda.",
+      "cnpj": "12.345.678/0001-95",
+      "endereco": "Rua XV de Novembro, 410 - Pelotas/RS",
+      "telefone": "(51) 3333-4444",
+      "email": "papelariacentral@papel.com",
+      "descricao": "Papelaria perto do shopping",
+      "status": "Ativo"
+    },
+    {
+      "id": "4",
+      "nomeFantasia": "RedeMax",
+      "razaoSocial": "RedeMax Soluções em Redes Ltda.",
+      "cnpj": "23.456.789/0001-00",
+      "endereco": "Av. Brasil, 3300 - Rio Grande/RS",
+      "telefone": "(51) 3333-4444",
+      "email": "contato@redemax.com",
+      "descricao": "Empressa especializada em redes",
+      "status": "Inativo"
+    }
+  ],
+  "manutencoes": [
+    {
+      "id": "1",
+      "equipamentoId": 2,
+      "tipoManutencao": "Corretiva",
+      "data": "2026-10-28",
+      "descricaoProblema": "Impressora apresentando falhas na impressão e atolamento de papel.",
+      "observacao": "Necessária limpeza interna e verificação dos roletes.",
+      "status": "Aberta"
+    },
+    {
+      "id": "2",
+      "equipamentoId": 4,
+      "tipoManutencao": "Corretiva",
+      "data": "2026-10-25",
+      "descricaoProblema": "Computador não está ligando.",
+      "observacao": "Suspeita de falha na fonte de alimentação.",
+      "status": "Em Andamento"
+    },
+    {
+      "id": "3",
+      "equipamentoId": 1,
+      "tipoManutencao": "Preventiva",
+      "data": "2026-10-10",
+      "descricaoProblema": "Manutenção preventiva periódica do notebook.",
+      "observacao": "Realizada limpeza interna e atualização do sistema.",
+      "status": "Aberta"
+    },
+    {
+      "id": "4",
+      "equipamentoId": 5,
+      "tipoManutencao": "Preventiva",
+      "data": "2026-10-05",
+      "descricaoProblema": "Verificação periódica do nobreak.",
+      "observacao": "Testes de autonomia e inspeção das baterias.",
+      "status": "Conclúida"
+    },
+    {
+      "id": "5",
+      "equipamentoId": 7,
+      "tipoManutencao": "Corretiva",
+      "data": "2026-11-01",
+      "descricaoProblema": "Falha de comunicação em algumas portas do switch.",
+      "observacao": "Necessária análise de configuração e atualização de firmware."
+    },
+    {
+      "id": "6",
+      "equipamentoId": 3,
+      "tipoManutencao": "Corretiva",
+      "data": "2026-09-20",
+      "descricaoProblema": "Monitor apresentando oscilações na imagem.",
+      "observacao": "Verificada conexão HDMI e ajustadas configurações de vídeo.",
+      "status": "Aberta"
+    },
+    {
+      "id": "7",
+      "equipamentoId": 6,
+      "tipoManutencao": "Preventiva",
+      "data": "2026-11-02",
+      "descricaoProblema": "Manutenção preventiva do sistema de refrigeração.",
+      "observacao": "Programada limpeza das ventoinhas e inspeção térmica.",
+      "status": "Aberta"
+    },
+    {
+      "id": "8",
+      "equipamentoId": 8,
+      "tipoManutencao": "Corretiva",
+      "data": "2026-09-15",
+      "descricaoProblema": "Impressora apresentando falhas de alimentação de papel.",
+      "observacao": "Equipamento encaminhado para avaliação técnica.",
+      "status": "Aberta"
+    },
+    {
+      "equipamentoId": 1,
+      "tipoManutencao": "Corretiva",
+      "data": "2026-11-02",
+      "descricaoProblema": "Notebook nao liga",
+      "observacao": "",
+      "prioridade": "Baixa",
+      "solicitante": "Chefe",
+      "status": "Aberta",
+      "id": "1d0Hqgmb4Uo"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}

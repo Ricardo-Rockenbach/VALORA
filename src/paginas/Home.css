@@ -1,0 +1,349 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+
+}
+
+.dash {
+  --laranja: #c84b00;
+  --marrom-menu: #8a3f00;
+  --marrom: #6b3000;
+
+  display: grid;
+  grid-template-columns: 250px 1fr;
+  min-height: 100vh;
+  font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  background: #fff;
+  color: var(--marrom);
+}
+
+.dash *,
+.dash *::before,
+.dash *::after {
+  box-sizing: border-box;
+}
+
+/* ---------- Sidebar ---------- */
+.dash-sidebar {
+  display: flex;
+  flex-direction: column;
+  padding: 24px 14px;
+  background: var(--laranja);
+  color: #fff;
+}
+
+.dash-sidebar h1 {
+  margin: 0 0 20px;
+  text-align: center;
+  font-size: 3rem;
+  font-style: "Roboto Mono", monospace;
+  font-weight: 900;
+}
+
+.dash-usuario {
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 800;
+  font-style: "Roboto Mono", monospace;
+}
+
+.dash-usuario p {
+  margin: 8px 0 0;
+}
+
+.dash-avatar {
+  display: inline-flex;
+  padding: 2px;
+  border-radius: 50%;
+  background: #fff;
+  color: #111;
+}
+
+/* ---------- Navegação ---------- */
+.dash-sidebar nav {
+  margin: 32px 0 0;
+}
+
+.dash-sidebar ul {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.dash-menu-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 7px 14px;
+  border: 0;
+  border-radius: 10px;
+  background: var(--marrom-menu);
+  color: #fff;
+  font: inherit;
+  font-size: 1.25rem;
+  font-weight: 800;
+  font-style: "Roboto Mono", monospace;
+  cursor: pointer;
+}
+
+.dash-menu-item:hover {
+  filter: brightness(1.15);
+}
+
+.dash-menu-item--ativo {
+  background: #5c2900;
+  box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.55);
+}
+
+.dash-menu-item span {
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+.dash-seta {
+  transition: transform 0.2s;
+}
+
+.dash-seta--aberta {
+  transform: rotate(90deg);
+}
+
+.dash-sidebar .dash-submenu {
+  gap: 2px;
+  margin: 0;
+  padding: 6px;
+  border-radius: 0 0 10px 10px;
+  background: #6f3200;
+
+}
+.dash-menu-item--aberto {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.dash-submenu-item {
+  display: block;
+  padding: 6px 12px;
+  border-radius: 8px;
+  color: #fff;
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.dash-submenu-item:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+/* ---------- Conteúdo ---------- */
+.dash-conteudo {
+  min-width: 0;
+  padding: 28px 32px;
+}
+
+.dash-titulo {
+  margin: 0 0 28px;
+}
+
+.dash-conteudo h2 {
+  font-size: 2.4rem;
+  font-style: roboto mono, monospace;
+  font-weight: 800;
+}
+
+.dash-subtitulo {
+  margin: 0 0 16px;
+  font-size: 1.5rem;
+  font-style: italic;
+  font-weight: 700;
+}
+.dash-resumo {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-bottom: 28px;
+}
+
+/* ---------- Cards ---------- */
+.dash-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 20px;
+  border-radius: 4px;
+  font-style: italic;
+}
+
+.dash-card svg {
+  flex-shrink: 0;
+}
+
+.dash-card strong {
+  display: block;
+  font-size: 2rem;
+  font-weight: 800;
+  line-height: 1.1;
+}
+
+.dash-card span {
+  display: block;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.dash-card--laranja {
+  background: #f7c896;
+  color: var(--marrom);
+}
+.dash-card--verde {
+  background: #b8ffc8;
+  color: #1e5b32;
+}
+.dash-card--vermelho {
+  background: #fdb5ae;
+  color: #b3150a;
+}
+.dash-card--amarelo {
+  background: #ffe4a0;
+  color: #d97706;
+}
+
+/* ---------- Área inferior ---------- */
+/* Quadro Ultimas manutencoes */
+.dash-inferior {
+  display: grid;
+  grid-template-columns: minmax(0, 2060px) 260px;
+  gap: 24px;
+  align-items: start;
+}
+
+.dash-lateral {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.dash-lateral .dash-card {
+    gap: 16px;
+    padding: 22px 24px; 
+}
+
+.dash-lateral .dash-card strong {
+  font-size: 2rem;
+}
+.dash-lateral .dash-card span {
+  font-size: 0.95rem;   /* o texto (Total de manutenções...) */
+}
+
+/* ---------- Tabela ---------- */
+.dash-tabela-cabecalho {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+/* titulo Ultimas - Manutencoes */
+.dash-tabela-cabecalho h3 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  font-size: 1.5rem;
+  font-style: italic;
+  font-weight: 800;
+}
+/* botao ver todas */
+.dash-ver-todas {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 12px;
+  border: 1px solid var(--laranja);
+  border-radius: 6px;
+  background: transparent;
+  color: var(--laranja);
+  font: inherit;
+  font-size: 1rem;
+  font-weight: 700;
+  font-style: italic;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.dash-ver-todas:hover {
+  background: #fdc192;
+}
+
+.dash-tabela-caixa {
+  padding: 10px 16px;
+  border: 1px solid var(--marrom-menu);
+  border-radius: 18px;
+}
+
+.dash-tabela-caixa table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 1rem;
+}
+
+.dash-tabela-caixa th {
+  padding: 8px 3px;
+  text-align: left;
+  font-size: 1.2rem;
+  font-weight: 800;
+  font-style: italic;
+}
+
+.dash-tabela-caixa td {
+  padding: 12px 6px;
+  border-top: 1px solid #b9a595;
+}
+
+
+
+.dash-ver-detalhes {
+  padding: 4px 10px;
+  border: 0;
+  border-radius: 5px;
+  background: var(--marrom-menu);
+  color: #fff;
+  font: inherit;
+  font-size: 0.80rem;
+  font-weight: 700;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.dash-ver-detalhes:hover {
+  filter: brightness(1.2);
+}
+
+/* ---------- Responsivo ---------- */
+@media (max-width: 1000px) {
+  .dash-inferior {
+    grid-template-columns: 1fr;
+  }
+  .dash-lateral {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  .dash-lateral .dash-card {
+    flex: 1 1 180px;
+  }
+}
+
+@media (max-width: 760px) {
+  .dash {
+    grid-template-columns: 1fr;
+  }
+  .dash-resumo {
+    grid-template-columns: 1fr;
+  }
+}

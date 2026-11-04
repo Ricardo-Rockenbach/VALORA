@@ -1,0 +1,257 @@
+/* Estilos exclusivos da tela Fornecedores (prefixo "fn-").
+   O layout e a sidebar vêm do mesmo CSS compartilhado das outras telas. */
+
+/* ---------- Barra de busca + botão ---------- */
+.fn-barra {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 36px;
+}
+
+.fn-busca {
+  display: block;
+  width: 100%;
+  max-width: 300px;
+}
+
+.fn-busca input {
+  width: 100%;
+  height: 44px;
+  padding: 0 14px;
+  border: 1px solid var(--marrom-menu);
+  border-radius: 8px;
+  outline: 0;
+  background: #fff;
+  color: var(--marrom);
+  font: inherit;
+  font-size: 0.9rem;
+  font-style: italic;
+}
+
+.fn-busca input::placeholder {
+  color: #8a8a8a;
+  font-weight: 700;
+}
+
+.fn-busca input:focus {
+  border-color: var(--laranja);
+  box-shadow: 0 0 0 2px rgba(200, 75, 0, 0.2);
+}
+
+/* Mesmo estilo do botão "Adicionar" das outras telas */
+.fn-adicionar {
+  padding: 14px 44px;
+  border: 0;
+  border-radius: 10px;
+  background: var(--laranja);
+  color: #fff;
+  font: inherit;
+  font-size: 1.3rem;
+  font-weight: 800;
+  font-style: italic;
+  cursor: pointer;
+}
+
+.fn-adicionar:hover {
+  filter: brightness(1.1);
+}
+
+/* ---------- Tabela ---------- */
+.fn-tabela-caixa {
+  overflow-x: auto;
+  border: 1px solid #d9a86c;
+  border-radius: 14px;
+}
+
+.fn-tabela-caixa table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+}
+
+.fn-tabela-caixa th {
+  padding: 14px 16px;
+  background: #f7c896;
+  text-align: left;
+  font-size: 0.85rem;
+  font-weight: 800;
+  font-style: italic;
+  white-space: nowrap;
+}
+
+.fn-tabela-caixa th:nth-child(1) { width: 6%; }
+.fn-tabela-caixa th:nth-child(2) { width: 18%; }
+.fn-tabela-caixa th:nth-child(3) { width: 30%; }
+.fn-tabela-caixa th:nth-child(4) { width: 18%; }
+.fn-tabela-caixa th:nth-child(5) { width: 10%; }
+.fn-tabela-caixa th:nth-child(6) { width: 18%; }
+
+.fn-coluna-acao {
+  text-align: right;
+}
+
+a.dash-ver-detalhes {
+  display: inline-block;
+  text-decoration: none;
+}
+
+.fn-tabela-caixa td {
+  padding: 18px 16px;
+  border-top: 1px solid #b9a595;
+}
+
+.fn-vazio {
+  color: #9a7a60;
+  text-align: center;
+  font-style: italic;
+}
+
+.fn-status--ativo {
+  color: #1e5b32;
+  font-weight: 700;
+}
+
+.fn-status--inativo {
+  color: #b3150a;
+  font-weight: 700;
+}
+
+/* ---------- Modal "Adicionar Setor" ---------- */
+.fn-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  background: rgba(0, 0, 0, 0.35);
+}
+
+.fn-modal {
+  width: min(430px, 100%);
+  max-height: 100%;
+  overflow-y: auto;
+  padding: 22px 26px 24px;
+  border: 1px solid #d9a86c;
+  border-radius: 14px;
+  background: #f9d7b0;
+  color: var(--marrom-menu);
+}
+
+.fn-modal h3 {
+  margin: 0 0 14px;
+  font-size: 1.25rem;
+  font-style: italic;
+  font-weight: 800;
+}
+
+.fn-campo {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-bottom: 14px;
+}
+
+.fn-campo span {
+  font-size: 0.8rem;
+  font-weight: 800;
+  font-style: italic;
+}
+
+.fn-campo input,
+.fn-campo textarea,
+.fn-campo select {
+  width: 100%;
+  padding: 6px 10px;
+  border: 1px solid var(--marrom-menu);
+  border-radius: 4px;
+  outline: 0;
+  background: #fff;
+  color: var(--marrom);
+  font: inherit;
+  font-size: 0.9rem;
+}
+
+.fn-campo input,
+.fn-campo select {
+  height: 34px;
+}
+
+.fn-campo textarea {
+  min-height: 70px;
+  resize: vertical;
+}
+
+.fn-campo input:focus,
+.fn-campo textarea:focus,
+.fn-campo select:focus {
+  border-color: var(--laranja);
+  box-shadow: 0 0 0 2px rgba(200, 75, 0, 0.2);
+}
+
+.fn-campo--status select {
+  width: 140px;
+  cursor: pointer;
+}
+
+.fn-campo--cnpj input {
+  width: 220px;
+}
+
+.fn-erro {
+  margin: 0 0 4px;
+  color: #b3150a;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.fn-modal-acoes {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  margin-top: 20px;
+}
+
+.fn-cancelar,
+.fn-salvar {
+  padding: 10px 22px;
+  border-radius: 18px;
+  font: inherit;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.fn-cancelar {
+  border: 1px solid var(--marrom-menu);
+  background: #f9d7b0;
+  color: #111;
+}
+
+.fn-cancelar:hover {
+  background: #fff1e6;
+}
+
+.fn-salvar {
+  min-width: 96px;
+  border: 0;
+  background: #f7870f;
+  color: #fff;
+}
+
+.fn-salvar:hover {
+  filter: brightness(1.08);
+}
+
+/* ---------- Responsivo ---------- */
+@media (max-width: 640px) {
+  .fn-barra {
+    flex-wrap: wrap;
+  }
+}

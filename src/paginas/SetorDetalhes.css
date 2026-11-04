@@ -1,0 +1,402 @@
+
+/* Estilos exclusivos da tela Detalhes do Setor (prefixo "sd-"). */
+
+/* ---------- Cabeçalho ---------- */
+.sd-conteudo {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.sd-cabecalho {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.sd-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+  color: #8a7462;
+  font-size: 0.8rem;
+}
+
+.sd-breadcrumb a {
+  color: var(--laranja);
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.sd-breadcrumb a:hover {
+  text-decoration: underline;
+}
+
+.sd-acoes {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.sd-editar,
+.sd-voltar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 40px;
+  padding: 9px 18px;
+  border-radius: 8px;
+  font: inherit;
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.sd-editar {
+  border: 1px solid var(--laranja);
+  background: var(--laranja);
+  color: #fff;
+}
+
+.sd-editar:hover {
+  filter: brightness(1.08);
+}
+
+.sd-editar svg {
+  width: 16px;
+  height: 16px;
+}
+
+.sd-voltar {
+  border: 1px solid var(--marrom-menu);
+  background: #fff;
+  color: var(--marrom-menu);
+}
+
+.sd-voltar:hover {
+  background: #fff1e6;
+}
+
+/* ---------- Identificação ---------- */
+.sd-identificacao {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 24px;
+  border: 1px solid #e5c5a5;
+  border-radius: 12px;
+  background: #fffaf5;
+}
+
+.sd-icone {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 66px;
+  height: 66px;
+  flex-shrink: 0;
+  border-radius: 12px;
+  background: #f9e9dc;
+  color: #c84e00;
+}
+
+.sd-icone svg {
+  width: 34px;
+  height: 34px;
+}
+
+.sd-identificacao-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+}
+
+.sd-identificacao-label {
+  color: #98765b;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.sd-identificacao-info h1 {
+  margin: 0;
+  color: var(--marrom-menu);
+  font-size: 1.45rem;
+  font-weight: 800;
+}
+
+/* ---------- Status ---------- */
+.sd-status {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.sd-identificacao-info .sd-status {
+  padding: 5px 12px;
+  border-radius: 20px;
+}
+
+.sd-status--ativo {
+  background: #e3f2e6;
+  color: #1e6835;
+}
+
+.sd-status--inativo {
+  background: #fce7e5;
+  color: #b3150a;
+}
+
+.sd-status--manutencao {
+  background: #fff0d9;
+  color: #a65b00;
+}
+
+/* ---------- Indicadores ---------- */
+.sd-indicadores {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.sd-indicador {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-height: 100px;
+  padding: 18px;
+  border: 1px solid #e5c5a5;
+  border-radius: 10px;
+  background: #fff;
+}
+
+.sd-indicador-icone {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+  border-radius: 10px;
+}
+
+.sd-indicador-icone svg {
+  width: 25px;
+  height: 25px;
+}
+
+.sd-icone-equipamentos {
+  background: #f9e9dc;
+  color: #c84e00;
+}
+
+.sd-icone-ativos {
+  background: #e3f2e6;
+  color: #28723e;
+}
+
+.sd-icone-localizacoes {
+  background: #f7ead5;
+  color: #9a6425;
+}
+
+.sd-indicador div:last-child {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.sd-indicador span {
+  color: #806c5a;
+  font-size: 0.82rem;
+}
+
+.sd-indicador strong {
+  color: var(--marrom-menu);
+  font-size: 1.45rem;
+  font-weight: 800;
+}
+
+/* ---------- Cards de informações ---------- */
+.sd-card {
+  padding: 22px;
+  border: 1px solid #e5c5a5;
+  border-radius: 12px;
+  background: #fff;
+}
+
+.sd-titulo-secao {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  margin-bottom: 22px;
+}
+
+.sd-titulo-secao h3 {
+  margin: 0;
+  color: var(--marrom-menu);
+  font-size: 1.05rem;
+  font-weight: 800;
+}
+
+.sd-titulo-secao p {
+  margin: 5px 0 0;
+  color: #927d69;
+  font-size: 0.82rem;
+}
+
+.sd-informacoes {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 22px 30px;
+}
+
+.sd-info-item {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  min-width: 0;
+}
+
+.sd-info-item > span {
+  color: #927d69;
+  font-size: 0.8rem;
+}
+
+.sd-info-item > strong {
+  color: var(--marrom-menu);
+  font-size: 0.92rem;
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+
+.sd-info-item.sd-info-descricao {
+  grid-column: 1 / -1;
+}
+
+/* ---------- Equipamentos vinculados ---------- */
+.sd-contador {
+  padding: 7px 12px;
+  border-radius: 20px;
+  background: #f9e9dc;
+  color: #a94100;
+  font-size: 0.78rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.sd-tabela-caixa {
+  overflow-x: auto;
+  border: 1px solid #e5c5a5;
+  border-radius: 9px;
+}
+
+.sd-tabela-caixa table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+}
+
+.sd-tabela-caixa th {
+  padding: 13px 15px;
+  background: #f7c896;
+  color: var(--marrom-menu);
+  text-align: left;
+  font-size: 0.82rem;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.sd-tabela-caixa td {
+  padding: 15px;
+  border-top: 1px solid #ead9c9;
+  color: var(--marrom);
+}
+
+.sd-tabela-caixa tbody tr:hover {
+  background: #fffaf5;
+}
+
+.sd-coluna-acao {
+  text-align: right;
+  white-space: nowrap;
+}
+
+.sd-link-detalhes {
+  color: var(--laranja);
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.sd-link-detalhes:hover {
+  text-decoration: underline;
+}
+
+.sd-vazio {
+  padding: 28px !important;
+  color: #9a7a60 !important;
+  text-align: center;
+  font-style: italic;
+}
+
+/* ---------- Erros ---------- */
+.sd-erro {
+  margin-bottom: 15px;
+  color: #b3150a;
+  font-weight: 700;
+}
+
+/* ---------- Responsivo ---------- */
+@media (max-width: 850px) {
+  .sd-indicadores {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .sd-cabecalho {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .sd-acoes {
+    width: 100%;
+  }
+
+  .sd-acoes a {
+    flex: 1;
+  }
+
+  .sd-identificacao {
+    padding: 18px;
+  }
+
+  .sd-identificacao-info h1 {
+    font-size: 1.2rem;
+  }
+
+  .sd-informacoes {
+    grid-template-columns: 1fr;
+  }
+
+  .sd-info-item.sd-info-descricao {
+    grid-column: auto;
+  }
+
+  .sd-card {
+    padding: 16px;
+  }
+
+  .sd-titulo-secao {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}

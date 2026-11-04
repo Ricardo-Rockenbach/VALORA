@@ -1,22 +1,32 @@
-const API_URL = 'http://localhost:3000'
 
-export async function listarEquipamentos() {
-  const response = await fetch(`${API_URL}/equipamentos`)
+import { apiRequest } from './api'
 
-  if (!response.ok) {
-    throw new Error('Erro ao buscar equipamentos')
-  }
-
-  return response.json()
+export function listarEquipamentos() {
+  return apiRequest('/equipamentos')
 }
 
-export async function buscarEquipamento(id) {
-  const response = await fetch(`${API_URL}/equipamentos/${id}`)
-
-  if (!response.ok) {
-    throw new Error('Equipamento não encontrado')
-  }
-
-  return response.json()
+export function buscarEquipamento(id) {
+  return apiRequest(`/equipamentos/${id}`)
 }
+
+export function cadastrarEquipamento(dados) {
+  return apiRequest('/equipamentos', {
+    method: 'POST',
+    body: JSON.stringify(dados),
+  })
+}
+
+export async function atualizarEquipamento(id, dados) {
+  return apiRequest(`/equipamentos/${id}`, {
+    method: 'PATCH',
+    body: JSON.stringify(dados),
+  })
+}
+
+export function excluirEquipamento(id) {
+  return apiRequest(`/equipamentos/${id}`, {
+    method: 'DELETE',
+  })
+}
+
 

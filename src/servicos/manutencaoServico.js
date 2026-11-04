@@ -1,37 +1,30 @@
-const API_URL = 'http://localhost:3000'
 
-export async function listarManutencoes() {
-    const response = await fetch(`${API_URL}/manutencoes`)
+import { apiRequest } from './api'
 
-    if (!response.ok) {
-        throw new Error('Erro ao buscar manutenções')
-    }
-    
-    return response.json()
+export function listarManutencoes() {
+  return apiRequest('/manutencoes')
 }
 
-export async function listarManutencoesPorEquipamento(equipamentoId) {
-    const response = await fetch( `${API_URL}/manutencoes?equipamento_id=${equipamentoId}`)
-    
-    if (!response.ok) {
-        throw new Error('Erro ao buscar histórico')
-    }
-
-    return response.json()
+export function buscarManutencao(id) {
+  return apiRequest(`/manutencoes/${id}`)
 }
 
-export async function criarManutencao(manutencao) {
-    const response = await fetch(`${API_URL}/manutencoes`, {
-        method: 'POST',
-        headers: {
-            'Content-type': 'application/json',
-        },
-        body: JSON.stringify(manutencao),
-    })
-    
-    if (!response.ok) {
-        throw new Error('Erro ao registrar manutenção')
-    }
+export function cadastrarManutencao(dados) {
+  return apiRequest('/manutencoes', {
+    method: 'POST',
+    body: JSON.stringify(dados),
+  })
+}
 
-    return response.json()
+export function atualizarManutencao(id, dados) {
+  return apiRequest(`/manutencoes/${id}`, {
+    method: 'PUT',
+    body: JSON.stringify(dados),
+  })
+}
+
+export function excluirManutencao(id) {
+  return apiRequest(`/manutencoes/${id}`, {
+    method: 'DELETE',
+  })
 }
