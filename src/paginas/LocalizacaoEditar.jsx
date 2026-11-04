@@ -7,8 +7,8 @@ import { listarLocalizacoes, atualizarLocalizacao } from '../servicos/localizaca
 import { listarSetores } from '../servicos/setorServico'
 
 // Utiliza o mesmo CSS da edição de equipamentos
-import './Home.css'
-import './EquipamentoNovo.css'
+import './css/Home.css'
+import './css/EquipamentoNovo.css'
 
 // Opções de status
 const statusOpcoes = ['Ativo', 'Inativo']

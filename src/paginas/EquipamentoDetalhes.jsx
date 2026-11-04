@@ -11,8 +11,8 @@ import { listarFornecedores } from '../servicos/fornecedorServico'
 import { listarManutencoes } from '../servicos/manutencaoServico'
 import { calcularSaudeEquipamento } from '../servicos/pontuacaoServico'
 
-import './Home.css'
-import './EquipamentoDetalhes.css'
+import './css/Home.css'
+import './css/EquipamentoDetalhes.css'
 
 function InfoItem({ titulo, valor }) {
   return (

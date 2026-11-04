@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import './Login.css'
+import './css/Login.css'
 
 // Os três destaques do painel esquerdo.
 const destaques = [

@@ -9,13 +9,13 @@
       "numeroSerie": "12345678910",
       "setorId": 2,
       "localizacaoId": 4,
-      "fornecedorId": null,
+      "fornecedorId": 1,
       "status": "Ativo",
       "observacao": "Notebook foi quebrado pelo usuario do financeiro",
       "notaFiscal": "",
-      "valor": null,
-      "dataAquisicao": "",
-      "garantia": "",
+      "valor": 4000,
+      "dataAquisicao": "2026-08-01",
+      "garantia": "2027-08-01",
       "id": "1"
     },
     {
@@ -56,7 +56,15 @@
       "localizacaoId": 2,
       "tipo": "Nobreak",
       "marca": "APC",
-      "status": "Inativo"
+      "status": "Ativo",
+      "modelo": "",
+      "numeroSerie": "",
+      "fornecedorId": null,
+      "observacao": "",
+      "notaFiscal": "",
+      "valor": null,
+      "dataAquisicao": "",
+      "garantia": ""
     },
     {
       "id": "6",
@@ -213,13 +221,15 @@
   ],
   "manutencoes": [
     {
-      "id": "1",
       "equipamentoId": 2,
       "tipoManutencao": "Corretiva",
       "data": "2026-10-28",
       "descricaoProblema": "Impressora apresentando falhas na impressão e atolamento de papel.",
       "observacao": "Necessária limpeza interna e verificação dos roletes.",
-      "status": "Aberta"
+      "prioridade": "Média",
+      "solicitante": "Miguel",
+      "status": "Aberta",
+      "id": "1"
     },
     {
       "id": "2",
@@ -231,13 +241,15 @@
       "status": "Em Andamento"
     },
     {
-      "id": "3",
       "equipamentoId": 1,
       "tipoManutencao": "Preventiva",
       "data": "2026-10-10",
       "descricaoProblema": "Manutenção preventiva periódica do notebook.",
-      "observacao": "Realizada limpeza interna e atualização do sistema.",
-      "status": "Aberta"
+      "observacao": "",
+      "prioridade": "Média",
+      "solicitante": "Ricardo",
+      "status": "Concluída",
+      "id": "3"
     },
     {
       "id": "4",
@@ -249,41 +261,48 @@
       "status": "Conclúida"
     },
     {
-      "id": "5",
       "equipamentoId": 7,
       "tipoManutencao": "Corretiva",
       "data": "2026-11-01",
       "descricaoProblema": "Falha de comunicação em algumas portas do switch.",
-      "observacao": "Necessária análise de configuração e atualização de firmware."
+      "observacao": "Necessária análise de configuração e atualização de firmware.",
+      "prioridade": "Média",
+      "solicitante": "Ricardo",
+      "status": "Aberta",
+      "id": "5"
     },
     {
-      "id": "6",
       "equipamentoId": 3,
       "tipoManutencao": "Corretiva",
       "data": "2026-09-20",
       "descricaoProblema": "Monitor apresentando oscilações na imagem.",
       "observacao": "Verificada conexão HDMI e ajustadas configurações de vídeo.",
-      "status": "Aberta"
+      "prioridade": "Média",
+      "solicitante": "Ricardo",
+      "status": "Concluída",
+      "id": "6"
     },
     {
-      "id": "7",
       "equipamentoId": 6,
       "tipoManutencao": "Preventiva",
       "data": "2026-11-02",
       "descricaoProblema": "Manutenção preventiva do sistema de refrigeração.",
       "observacao": "Programada limpeza das ventoinhas e inspeção térmica.",
-      "status": "Em Análise",
       "prioridade": "Média",
-      "solicitante": "Miguel"
+      "solicitante": "Miguel",
+      "status": "Em Andamento",
+      "id": "7"
     },
     {
-      "id": "8",
       "equipamentoId": 8,
       "tipoManutencao": "Corretiva",
       "data": "2026-09-15",
       "descricaoProblema": "Impressora apresentando falhas de alimentação de papel.",
-      "observacao": "Equipamento encaminhado para avaliação técnica.",
-      "status": "Aberta"
+      "observacao": "",
+      "prioridade": "Média",
+      "solicitante": "Miguel",
+      "status": "Concluída",
+      "id": "8"
     },
     {
       "equipamentoId": 1,
@@ -321,6 +340,18 @@
       "descricao": "Verificando integridade do equipamento.",
       "dataCriacao": "2026-11-04",
       "id": "tEMCY25Pdes"
+    },
+    {
+      "manutencaoId": 8,
+      "descricao": "Trocadas peças do equipamento",
+      "dataCriacao": "2026-11-04",
+      "id": "OkrE0u6xXwM"
+    },
+    {
+      "manutencaoId": 3,
+      "descricao": "Realizada limpeza interna e atualização do sistema.",
+      "dataCriacao": "2026-11-04",
+      "id": "M-uAUqwhrAI"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

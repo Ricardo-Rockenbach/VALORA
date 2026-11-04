@@ -7,8 +7,8 @@ import { listarSetores } from '../servicos/setorServico'
 import { listarManutencoes } from '../servicos/manutencaoServico'
 import { calcularSaudeEquipamento } from '../servicos/pontuacaoServico'
 
-import './Home.css'
-import './Analytics.css'
+import './css/Home.css'
+import './css/Analytics.css'
 
 function normalizar(texto = '') {
   return String(texto ?? '')

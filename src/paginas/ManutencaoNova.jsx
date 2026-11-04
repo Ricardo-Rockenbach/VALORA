@@ -1,15 +1,15 @@
 
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import Sidebar from '../componentes/Sidebar'
+import Sidebar from '../componentes/sidebar'
 import { listarEquipamentos } from '../servicos/equipamentoServico'
 import { listarSetores } from '../servicos/setorServico'
 import {
   listarManutencoes,
   cadastrarManutencao,
 } from '../servicos/manutencaoServico'
-import './Home.css'
-import './ManutencaoNova.css'
+import './css/Home.css'
+import './css/ManutencaoNova.css'
 
 const prioridades = ['Baixa', 'Média', 'Alta']
 const tiposManutencao = ['Corretiva', 'Preventiva', 'Troca de peça', 'Atualização']

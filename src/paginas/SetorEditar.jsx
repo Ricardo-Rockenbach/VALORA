@@ -6,8 +6,8 @@ import Sidebar from '../componentes/sidebar'
 import { listarSetores, atualizarSetor } from '../servicos/setorServico'
 
 // Utiliza o mesmo CSS da edição de equipamentos
-import './Home.css'
-import './EquipamentoNovo.css'
+import './css/Home.css'
+import './css/EquipamentoNovo.css'
 
 // Opções de status
 const statusOpcoes = ['Ativo', 'Inativo']

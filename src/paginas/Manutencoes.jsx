@@ -4,8 +4,8 @@ import { Link, useSearchParams } from 'react-router-dom'
 import Sidebar from '../componentes/sidebar'
 import { listarManutencoes } from '../servicos/manutencaoServico'
 import { listarEquipamentos } from '../servicos/equipamentoServico'
-import './Home.css'
-import './Manutencoes.css'
+import './css/Home.css'
+import './css/Manutencoes.css'
 
 // Devolve a data de N dias atrás.
 function diasAtras(n) {

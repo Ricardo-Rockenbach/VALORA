@@ -8,8 +8,8 @@ import { listarSetores } from '../servicos/setorServico'
 import { listarLocalizacoes } from '../servicos/localizacaoServico'
 import { listarFornecedores } from '../servicos/fornecedorServico'
 //USA CSS DO EQUIPAMENTO NOVO, POIS É O MESMO FORMULÁRIO, SÓ MUDANDO O TÍTULO E A FUNÇÃO DE SALVAR
-import './Home.css'
-import './EquipamentoNovo.css'
+import './css/Home.css'
+import './css/EquipamentoNovo.css'
 
 const tipos = [
   'Computador',

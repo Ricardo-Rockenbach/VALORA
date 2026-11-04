@@ -2,8 +2,8 @@ import { useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import Sidebar from '../componentes/sidebar'
 import { listarFornecedores, cadastrarFornecedor} from '../servicos/fornecedorServico'
-import './Home.css' // layout e sidebar compartilhados (o mesmo CSS do Equipamentos.jsx)
-import './Fornecedores.css'
+import './css/Home.css' // layout e sidebar compartilhados (o mesmo CSS do Equipamentos.jsx)
+import './css/Fornecedores.css'
 
 
 

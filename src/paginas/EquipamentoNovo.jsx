@@ -5,8 +5,8 @@ import Sidebar from '../componentes/sidebar'
 import { listarSetores } from '../servicos/setorServico'
 import { listarLocalizacoes } from '../servicos/localizacaoServico'
 import { listarFornecedores } from '../servicos/fornecedorServico'
-import './Home.css'
-import './EquipamentoNovo.css'
+import './css/Home.css'
+import './css/EquipamentoNovo.css'
 
 const tipos = [
   'Computador',

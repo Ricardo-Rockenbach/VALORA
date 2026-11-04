@@ -6,8 +6,8 @@ import Sidebar from '../componentes/sidebar'
 import { listarFornecedores } from '../servicos/fornecedorServico'
 import { listarEquipamentos } from '../servicos/equipamentoServico'
 
-import './Home.css'
-import './EquipamentoDetalhes.css'
+import './css/Home.css'
+import './css/EquipamentoDetalhes.css'
 
 function InfoItem({ titulo, valor }) {
   return (

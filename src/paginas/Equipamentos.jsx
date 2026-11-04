@@ -4,8 +4,8 @@ import Sidebar from '../componentes/sidebar'
 import { listarEquipamentos } from '../servicos/equipamentoServico'
 import { listarSetores } from '../servicos/setorServico'
 import { listarFornecedores } from '../servicos/fornecedorServico'
-import './Home.css' // layout, cards e sidebar compartilhados
-import './Equipamentos.css'
+import './css/Home.css' // layout, cards e sidebar compartilhados
+import './css/Equipamentos.css'
 
 
 

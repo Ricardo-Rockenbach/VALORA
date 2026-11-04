@@ -8,8 +8,8 @@ import {
   atualizarFornecedor,
 } from '../servicos/fornecedorServico'
 
-import './Home.css'
-import './EquipamentoNovo.css'
+import './css/Home.css'
+import './css/EquipamentoNovo.css'
 
 const formularioVazio = {
   razaoSocial: '',

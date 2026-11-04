@@ -5,7 +5,7 @@ import { listarEquipamentos } from '../servicos/equipamentoServico'
 import { listarSetores } from '../servicos/setorServico'
 import { listarManutencoes } from '../servicos/manutencaoServico'
 import { calcularSaudeEquipamento } from '../servicos/pontuacaoServico'
-import './Home.css'
+import './css/Home.css'
 
 // Padroniza textos para comparar status e classificações sem depender
 // de acentos, maiúsculas ou espaços excedentes.

@@ -1,6 +1,6 @@
 import Sidebar from '../componentes/sidebar'
-import './Home.css'
-import './Configuracoes.css'
+import './css/Home.css'
+import './css/Configuracoes.css'
 
 function Icone({ tipo }) {
   const formas = {

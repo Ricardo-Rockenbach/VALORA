@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom'
 import Sidebar from '../componentes/sidebar'
 import { listarSetores, cadastrarSetor } from '../servicos/setorServico'
 import { listarLocalizacoes } from '../servicos/localizacaoServico'
-import './Home.css' // layout e sidebar compartilhados (o mesmo CSS do Equipamentos.jsx)
-import './Setores.css'
+import './css/Home.css' // layout e sidebar compartilhados (o mesmo CSS do Equipamentos.jsx)
+import './css/Setores.css'
 
 
 

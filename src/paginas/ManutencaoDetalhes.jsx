@@ -12,9 +12,9 @@ import {
   excluirTarefa,
 } from '../servicos/tarefaServico'
 
-import './Home.css'
-import './EquipamentoDetalhes.css'
-import './ManutencaoDetalhes.css'
+import './css/Home.css'
+import './css/EquipamentoDetalhes.css'
+import './css/ManutencaoDetalhes.css'
 
 function normalizar(texto = '') {
   return String(texto)

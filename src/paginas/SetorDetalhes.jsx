@@ -1,14 +1,14 @@
 
 import { useEffect, useMemo, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
-import Sidebar from '../componentes/Sidebar'
+import Sidebar from '../componentes/sidebar'
 
 import { listarSetores } from '../servicos/setorServico'
 import { listarEquipamentos } from '../servicos/equipamentoServico'
 import { listarLocalizacoes } from '../servicos/localizacaoServico'
 
-import './Home.css'
-import './SetorDetalhes.css'
+import './css/Home.css'
+import './css/SetorDetalhes.css'
 
 function classeStatus(status) {
   if (status === 'Ativo') return 'sd-status sd-status--ativo'

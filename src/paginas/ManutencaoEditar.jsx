@@ -10,8 +10,8 @@ import {
 
 import { listarEquipamentos } from '../servicos/equipamentoServico'
 
-import './Home.css'
-import './EquipamentoNovo.css'
+import './css/Home.css'
+import './css/EquipamentoNovo.css'
 
 const tiposManutencao = [
   'Corretiva',
