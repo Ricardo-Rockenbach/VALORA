@@ -23,7 +23,7 @@ Facilitar o acompanhamento do estado dos equipamentos e do histórico de interve
 - React
 - Vite
 - React Router
-- Tailwind CSS
+- CSS
 - JSON Server — API simulada para desenvolvimento
 
 ## Como executar
