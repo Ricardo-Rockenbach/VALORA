@@ -5,6 +5,7 @@ import Sidebar from '../componentes/sidebar'
 import { listarSetores } from '../servicos/setorServico'
 import { listarLocalizacoes } from '../servicos/localizacaoServico'
 import { listarFornecedores } from '../servicos/fornecedorServico'
+import { cadastrarEquipamento } from '../servicos/equipamentoServico'
 import './css/Home.css'
 import './css/EquipamentoNovo.css'
 
@@ -124,6 +125,8 @@ export default function EquipamentoNovo() {
 
   const [carregandoOpcoes, setCarregandoOpcoes] = useState(true)
   const [erroOpcoes, setErroOpcoes] = useState('')
+  const [erroSalvar, setErroSalvar] = useState('')
+  const [salvando, setSalvando] = useState(false)
 
   // Carrega os dados das três coleções da API
   useEffect(() => {
@@ -181,8 +184,8 @@ export default function EquipamentoNovo() {
     })
   }
 
-  // Salva os dados
-  function salvar(evento) {
+  // Salva os dados na API do VALORA.
+  async function salvar(evento) {
     evento.preventDefault()
 
     const equipamento = {
@@ -199,10 +202,17 @@ export default function EquipamentoNovo() {
       valor: form.valor === '' ? null : Number(form.valor),
     }
 
-    // TODO: enviar para a API de equipamentos.
-    console.log('Equipamento a salvar:', equipamento)
-
-    navigate('/equipamentos')
+    try {
+      setSalvando(true)
+      setErroSalvar('')
+      await cadastrarEquipamento(equipamento)
+      navigate('/equipamentos')
+    } catch (error) {
+      console.error('Erro ao cadastrar equipamento:', error)
+      setErroSalvar('Não foi possível cadastrar o equipamento. Verifique se o patrimônio já existe e tente novamente.')
+    } finally {
+      setSalvando(false)
+    }
   }
 
   // Dados de cada campo
@@ -221,6 +231,10 @@ export default function EquipamentoNovo() {
 
         {erroOpcoes && (
           <p role="alert">{erroOpcoes}</p>
+        )}
+
+        {erroSalvar && (
+          <p role="alert">{erroSalvar}</p>
         )}
 
         <form className="nv-form" onSubmit={salvar}>
@@ -347,9 +361,9 @@ export default function EquipamentoNovo() {
               <button
                 type="submit"
                 className="nv-salvar"
-                disabled={carregandoOpcoes || !!erroOpcoes}
+                disabled={carregandoOpcoes || !!erroOpcoes || salvando}
               >
-                {carregandoOpcoes ? 'Carregando...' : 'Salvar'}
+                {carregandoOpcoes ? 'Carregando...' : salvando ? 'Salvando...' : 'Salvar'}
               </button>
             </div>
           </aside>

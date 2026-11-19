@@ -2,7 +2,7 @@
   "equipamentos": [
     {
       "patrimonio": "TI-00231",
-      "nome": "Notebook Dell Latitude",
+      "nome": "Notebook Dell Latitude up",
       "tipo": "Notebook",
       "marca": "Dell",
       "modelo": "",
@@ -94,7 +94,15 @@
       "localizacaoId": 4,
       "tipo": "Impressora",
       "marca": "Epson",
-      "status": "Inativo"
+      "status": "Inativo",
+      "modelo": "",
+      "numeroSerie": "",
+      "fornecedorId": 3,
+      "observacao": "",
+      "notaFiscal": "",
+      "valor": 2000,
+      "dataAquisicao": "2026-09-15",
+      "garantia": "2027-09-15"
     }
   ],
   "setores": [
@@ -314,6 +322,17 @@
       "solicitante": "Chefe",
       "status": "Aberta",
       "id": "1d0Hqgmb4Uo"
+    },
+    {
+      "equipamentoId": 1,
+      "tipoManutencao": "Corretiva",
+      "data": "2026-11-04",
+      "descricaoProblema": "hd",
+      "observacao": "",
+      "prioridade": "Alta",
+      "solicitante": "eu",
+      "status": "Em Andamento",
+      "id": "QtgEM_wPdn8"
     }
   ],
   "tarefas": [
@@ -352,6 +371,18 @@
       "descricao": "Realizada limpeza interna e atualização do sistema.",
       "dataCriacao": "2026-11-04",
       "id": "M-uAUqwhrAI"
+    },
+    {
+      "manutencaoId": null,
+      "descricao": "Troca de HD",
+      "dataCriacao": "2026-11-04",
+      "id": "9M_HT5tFhOs"
+    },
+    {
+      "manutencaoId": null,
+      "descricao": "kkkkk",
+      "dataCriacao": "2026-11-04",
+      "id": "onnG_ZURecc"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

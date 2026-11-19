@@ -1,4 +1,3 @@
-
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000'
 
 export async function apiRequest(endpoint, options = {}) {
@@ -11,7 +10,10 @@ export async function apiRequest(endpoint, options = {}) {
   })
 
   if (!response.ok) {
-    throw new Error(`Erro na requisição: ${response.status}`)
+    const erroApi = await response.json().catch(() => null)
+    throw new Error(
+      erroApi?.erro || `Erro na requisição: ${response.status}`
+    )
   }
 
   if (response.status === 204) {

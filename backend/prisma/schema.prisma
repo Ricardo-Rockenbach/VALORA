@@ -1,0 +1,115 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model Setor {
+  id           Int           @id @default(autoincrement())
+  nome         String
+  descricao    String?
+  status       String?
+  localizacoes Localizacao[]
+  equipamentos Equipamento[]
+
+  @@index([status])
+  @@map("setores")
+}
+
+model Localizacao {
+  id           Int           @id @default(autoincrement())
+  nome         String
+  setorId      Int           @map("setor_id")
+  descricao    String?
+  status       String?
+  setor        Setor         @relation(fields: [setorId], references: [id], onDelete: Restrict)
+  equipamentos Equipamento[]
+
+  @@index([setorId])
+  @@index([status])
+  @@map("localizacoes")
+}
+
+model Fornecedor {
+  id              Int           @id @default(autoincrement())
+  nomeFantasia    String        @map("nome_fantasia")
+  razaoSocial     String?       @map("razao_social")
+  cnpj            String?
+  endereco        String?
+  telefone        String?
+  email           String?
+  descricao       String?
+  status          String?
+  equipamentos    Equipamento[]
+
+  @@index([nomeFantasia])
+  @@index([status])
+  @@map("fornecedores")
+}
+
+model Equipamento {
+  id             Int          @id @default(autoincrement())
+  patrimonio     String       @unique
+  nome           String
+  tipo           String?
+  marca          String?
+  modelo         String?
+  numeroSerie    String?      @map("numero_serie")
+  setorId        Int?         @map("setor_id")
+  localizacaoId  Int?         @map("localizacao_id")
+  fornecedorId   Int?         @map("fornecedor_id")
+  status         String?
+  observacao     String?
+  notaFiscal     String?      @map("nota_fiscal")
+  valor          Float?
+  dataAquisicao  DateTime?    @db.Date @map("data_aquisicao")
+  garantia       DateTime?    @db.Date
+  setor          Setor?       @relation(fields: [setorId], references: [id], onDelete: Restrict)
+  localizacao    Localizacao? @relation(fields: [localizacaoId], references: [id], onDelete: Restrict)
+  fornecedor     Fornecedor?  @relation(fields: [fornecedorId], references: [id], onDelete: SetNull)
+  manutencoes    Manutencao[]
+  createdAt      DateTime     @default(now()) @map("created_at")
+  updatedAt      DateTime     @updatedAt @map("updated_at")
+
+  @@index([setorId])
+  @@index([localizacaoId])
+  @@index([fornecedorId])
+  @@index([status])
+  @@map("equipamentos")
+}
+
+model Manutencao {
+  id                 Int        @id @default(autoincrement())
+  equipamentoId      Int        @map("equipamento_id")
+  tipoManutencao     String?    @map("tipo_manutencao")
+  data               DateTime?  @db.Date
+  descricaoProblema  String?    @map("descricao_problema")
+  observacao         String?
+  prioridade         String?
+  solicitante        String?
+  status             String?
+  equipamento        Equipamento @relation(fields: [equipamentoId], references: [id], onDelete: Restrict)
+  tarefas            Tarefa[]
+  createdAt          DateTime   @default(now()) @map("created_at")
+  updatedAt          DateTime   @updatedAt @map("updated_at")
+
+  @@index([equipamentoId])
+  @@index([status])
+  @@index([data])
+  @@map("manutencoes")
+}
+
+model Tarefa {
+  id           Int         @id @default(autoincrement())
+  manutencaoId Int?        @map("manutencao_id")
+  descricao    String
+  dataCriacao  DateTime?   @db.Date @map("data_criacao")
+  manutencao   Manutencao? @relation(fields: [manutencaoId], references: [id], onDelete: Cascade)
+
+  @@index([manutencaoId])
+  @@map("tarefas")
+}

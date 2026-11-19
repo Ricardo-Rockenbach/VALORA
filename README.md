@@ -24,13 +24,15 @@ Facilitar o acompanhamento do estado dos equipamentos e do histórico de interve
 - Vite
 - React Router
 - CSS
-- JSON Server — API simulada para desenvolvimento
+- Node.js + Express — API REST
+- PostgreSQL no Neon — banco de dados
+- Prisma ORM — modelagem e acesso aos dados
 
 ## Como executar
 
 ### Pré-requisitos
 
-- Node.js e npm instalados.
+- Node.js 20.19 ou superior e npm instalados.
 - Git instalado.
 
 ### 1. Clonar o repositório
@@ -46,13 +48,20 @@ cd VALORA
 npm install
 ```
 
-### 3. Iniciar a API simulada
+### 3. Configurar o banco Neon e iniciar a API
 
-Em um terminal, execute:
+Crie um projeto PostgreSQL no [Neon](https://console.neon.tech/), copie a URL pooled para `DATABASE_URL` e a URL direta para `DIRECT_URL` no arquivo `backend/.env` (use `backend/.env.example` como modelo). Em seguida, execute:
 
 ```bash
-npm run server
+cd backend
+npm install
+npm run db:generate
+npm run db:migrate
+npm run db:seed
+npm run dev
 ```
+
+O `db:seed` importa os dados iniciais da API fake e deve ser executado somente em banco novo/vazio. Para detalhes, consulte `backend/README.md`.
 
 A API ficará disponível em:
 
@@ -79,7 +88,8 @@ http://localhost:5173
 | Comando | Descrição |
 |---|---|
 | `npm run dev` | Inicia o ambiente de desenvolvimento |
-| `npm run server` | Inicia a API simulada com JSON Server |
+| `npm run server` | Inicia a API Express (com dependências do backend instaladas) |
+| `npm run server:fake` | Inicia a API antiga com JSON Server para testes temporários |
 | `npm run build` | Gera a versão de produção |
 | `npm run preview` | Executa uma prévia da build |
 | `npm run lint` | Executa a análise estática do código |
@@ -88,7 +98,8 @@ http://localhost:5173
 
 ```text
 VALORA/
-├── VALORA-API-FAKE/   # Dados e API simulada
+├── backend/           # API Express, Prisma, schema e seed do Neon
+├── VALORA-API-FAKE/   # Backup da API fake / dados originais
 ├── public/            # Arquivos públicos
 ├── src/               # Código da aplicação React
 ├── index.html
