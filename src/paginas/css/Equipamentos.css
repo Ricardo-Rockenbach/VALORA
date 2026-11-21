@@ -15,6 +15,8 @@ a.dash-ver-detalhes {
   background: rgba(255, 255, 255, 0.2);
 }
 
+
+
 /* ---------- Cabeçalho ---------- */
 .eq-cabecalho {
   display: flex;
@@ -26,23 +28,24 @@ a.dash-ver-detalhes {
 
 .eq-cabecalho .dash-titulo {
   margin: 0;
-  font-style: "Roboto Mono", monospace;
-  font-size: 2.5rem;
-  font-style: "Roboto Mono", monospace;
-  font-weight: 800;
+  font-family: "Roboto Mono", monospace;
+  font-size: 36px;
+  font-weight: 700;
+  font-style: normal;
 }
 
 .eq-adicionar {
-  padding: 14px 44px;
+  padding: 8px 18px;
   border: 0;
-  border-radius: 10px;
+  border-radius: 5px;
   background: var(--laranja);
   color: #fff;
   font: inherit;
-  font-size: 1.3rem;
-  font-weight: 800;
-  font-style: italic;
+  font-size: 14px;
+  font-weight: 600;
   cursor: pointer;
+  position: relative;
+  top: 12.5rem;
 }
 a.eq-adicionar {
   display: inline-block;
@@ -61,24 +64,42 @@ a.eq-adicionar {
 }
 
 .eq-card {
-  width: 170px;            /* largura do card */
-  padding: 26px 12px;      /* altura e espaço interno */
-  border-radius: 6px;
+  width: 190px;            /* largura do card */
+  padding: 18px 14px;      /* altura e espaço interno */
+  border-radius: 5px;
   text-align: center;
-  font-style: italic;
+}
+
+.eq-card.dash-card--laranja {
+  background: #F6D5B5;
+  color: #753500;
+}
+
+.eq-card.dash-card--verde {
+  background: #C7EED2;
+  color: #176239;
+}
+
+.eq-card.dash-card--amarelo {
+  background: #FBE3A9;
+  color: #A65B00;
+}
+
+.eq-card.dash-card--vermelho {
+  background: #F5C6C2;
+  color: #A82018;
 }
 
 .eq-card strong {
   display: block;
-  font-size: 2.2rem;       /* o número */
+  font-size: 2rem;       /* o número */
   font-weight: 800;
-  line-height: 1.1;
 }
 
 .eq-card span {
   display: block;
-  font-size: 1.2rem;       /* o texto */
-  font-weight: 700;
+  font-size: 0.95rem;       /* o texto */
+  font-weight: 600;
 }
 
 /* ---------- Busca e filtros ---------- */
@@ -94,7 +115,7 @@ a.eq-adicionar {
 .eq-filtro {
   height: 42px;
   border: 1px solid var(--marrom-menu);
-  border-radius: 8px;
+  border-radius: 5px;
   color: var(--marrom);
 }
 
@@ -115,7 +136,6 @@ a.eq-adicionar {
   color: var(--marrom);
   font: inherit;
   font-size: 0.9rem;
-  font-style: italic;
 }
 
 .eq-busca input::placeholder {
@@ -132,13 +152,31 @@ a.eq-adicionar {
   padding: 0 32px 0 12px;
 }
 
+
 .eq-filtro-rotulo {
   display: flex;
   align-items: center;
   gap: 4px;
   font-size: 0.70rem;
   font-weight: 800;
-  font-style: italic;
+}
+
+.eq-limpar-filtros{
+  min-height: 39px;
+  padding: 0 13px;
+  border: 1px solid #ddcec4;
+  border-radius: 8px;
+  background: var(--marrom-menu);
+  color: #fff;
+  font: inherit;
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.eq-limpar-filtros:hover {
+  border-color: #c84b00;
+  color: #c84b00;
 }
 
 .eq-filtro select {
@@ -175,7 +213,6 @@ a.eq-adicionar {
   font: inherit;
   font-size: 0.95rem;
   font-weight: 800;
-  font-style: italic;
   cursor: pointer;
 }
 
@@ -202,7 +239,6 @@ a.eq-adicionar {
   text-align: left;
   font-size: 0.85rem;
   font-weight: 800;
-  font-style: italic;
   white-space: nowrap;
 }
 
@@ -222,7 +258,6 @@ a.eq-adicionar {
 .eq-vazio {
   color: #9a7a60;
   text-align: center;
-  font-style: italic;
 }
 
 .eq-status--ativo {

@@ -1,7 +1,13 @@
 import { useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { Search } from 'lucide-react'
+
+
 import Sidebar from '../componentes/sidebar'
+
+
 import { listarFornecedores, cadastrarFornecedor} from '../servicos/fornecedorServico'
+
 import './css/Home.css' // layout e sidebar compartilhados (o mesmo CSS do Equipamentos.jsx)
 import './css/Fornecedores.css'
 
@@ -155,6 +161,7 @@ export default function Fornecedores() {
 
         <div className="fn-barra">
           <label className="fn-busca">
+            <Search size={18} />
             <input
               type="search"
               placeholder="Buscar"

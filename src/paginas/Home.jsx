@@ -1,6 +1,11 @@
 import { useEffect, useMemo, useState } from 'react'
+
+
 import { Link } from 'react-router-dom'
 import Sidebar from '../componentes/sidebar'
+import {  Boxes, Monitor, HeartPulse, CircleCheck, Wrench, TriangleAlert, ChevronRight, PackageOpen} from "lucide-react"
+
+
 import { listarEquipamentos } from '../servicos/equipamentoServico'
 import { listarSetores } from '../servicos/setorServico'
 import { listarManutencoes } from '../servicos/manutencaoServico'
@@ -76,68 +81,17 @@ function obterClasseSaude(classificacao) {
   return 'critica'
 }
 
-function Icone({ nome, tamanho = 24 }) {
-  const formas = {
-    equipamentos: (
-      <>
-        <rect x="3" y="4" width="18" height="13" rx="2" />
-        <path d="M8 21h8M12 17v4" />
-      </>
-    ),
-    saude: (
-      <>
-        <path d="M20.8 8.8c0 5.1-8.8 11-8.8 11s-8.8-5.9-8.8-11A4.8 4.8 0 0 1 12 6.2a4.8 4.8 0 0 1 8.8 2.6Z" />
-        <path d="M7.5 12h3l1.5-3 2 6 1.5-3h1.5" />
-      </>
-    ),
-    manutencao: (
-      <>
-        <path d="M14.7 6.3a4 4 0 0 0-5.4 5.2L3 17.8V21h3.2l6.3-6.3a4 4 0 0 0 5.2-5.4l-2.6 2.6-2.5-.5-.5-2.5z" />
-      </>
-    ),
-    ativos: (
-      <>
-        <circle cx="12" cy="12" r="9" />
-        <path d="m8 12 2.5 2.5L16.5 9" />
-      </>
-    ),
-    alerta: (
-      <>
-        <path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z" />
-        <path d="M12 9v4M12 17h.01" />
-      </>
-    ),
-    lista: <path d="M4 7h16M4 12h16M4 17h16" />,
-    seta: <path d="m9 5 7 7-7 7" />,
-  }
 
-  return (
-    <svg
-      width={tamanho}
-      height={tamanho}
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.8"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-    >
-      {formas[nome]}
-    </svg>
-  )
-}
 
-function Indicador({ icone, rotulo, valor, detalhe, cor }) {
+function Indicador({ icone, rotulo, valor, cor }) {
   return (
     <article className={`home-kpi home-kpi--${cor}`}>
-      <span className="home-kpi-icone">
-        <Icone nome={icone} tamanho={23} />
-      </span>
+    <span className="home-kpi-icone">
+          {icone}
+    </span>
       <div className="home-kpi-conteudo">
         <span className="home-kpi-rotulo">{rotulo}</span>
         <strong>{valor}</strong>
-        <small>{detalhe}</small>
       </div>
     </article>
   )
@@ -317,10 +271,10 @@ export default function Dashboard() {
           <div>
             <span className="home-sobretitulo">GESTÃO DE ATIVOS DE TI</span>
             <h2 className="dash-titulo">Painel Principal</h2>
-            <p>Acompanhe a situação dos equipamentos, a saúde dos ativos e as manutenções.</p>
+            <p>"Visão geral dos ativos e suas manutenções.".</p>
           </div>
           <Link to="/equipamentos" className="home-acao-principal">
-            <Icone nome="equipamentos" tamanho={18} />
+            <Monitor size={18} />
             Consultar equipamentos
           </Link>
         </header>
@@ -338,42 +292,41 @@ export default function Dashboard() {
               <div className="home-secao-cabecalho">
                 <div>
                   <h3>Visão geral dos equipamentos</h3>
-                  <p>Indicadores calculados a partir dos cadastros e históricos atuais.</p>
                 </div>
                 <span className="home-atualizacao">{resumoEquipamentos.total} equipamentos cadastrados</span>
               </div>
 
               <div className="home-kpis">
                 <Indicador
-                  icone="equipamentos"
+                  icone={<Monitor size={24} />}
                   rotulo="Equipamentos cadastrados"
                   valor={resumoEquipamentos.total}
                   detalhe="Total de ativos registrados"
                   cor="neutro"
                 />
                 <Indicador
-                  icone="saude"
+                  icone={<HeartPulse size={23} />}
                   rotulo="Saúde média"
                   valor={`${resumoEquipamentos.saudeMedia}/100`}
                   detalhe="Média do Score dos equipamentos"
                   cor="saude"
                 />
                 <Indicador
-                  icone="ativos"
+                  icone={<CircleCheck size={23} />}
                   rotulo="Ativos"
                   valor={resumoEquipamentos.ativos}
                   detalhe="Em operação"
                   cor="positivo"
                 />
                 <Indicador
-                  icone="manutencao"
+                  icone={<Wrench size={23} />}
                   rotulo="Em manutenção"
                   valor={resumoEquipamentos.emManutencao}
                   detalhe="Com status de manutenção"
                   cor="aviso"
                 />
                 <Indicador
-                  icone="alerta"
+                  icone={<TriangleAlert size={23} />}
                   rotulo="Inativos"
                   valor={resumoEquipamentos.inativos}
                   detalhe="Fora de operação"
@@ -387,9 +340,8 @@ export default function Dashboard() {
                 <div className="home-painel-cabecalho">
                   <div>
                     <h3>Saúde dos equipamentos</h3>
-                    <p>Distribuição por faixa de pontuação.</p>
                   </div>
-                  <span className="home-painel-icone"><Icone nome="saude" tamanho={21} /></span>
+                  <span className="home-painel-icone"></span>
                 </div>
 
                 <div className="home-distribuicao">
@@ -419,10 +371,31 @@ export default function Dashboard() {
                 </div>
 
                 <div className="home-legenda-score">
-                  <span>Excelente: 90–100</span>
-                  <span>Boa: 75–89</span>
-                  <span>Atenção: 50–74</span>
-                  <span>Crítica: 0–49</span>
+                  <span className="home-legenda-titulo">
+                    Classificação da saúde
+                  </span>
+
+                  <div className="home-legenda-faixas">
+                    <div className="home-legenda-item">
+                      <span>Excelente</span>
+                      <span>90–100</span>
+                    </div>
+
+                    <div className="home-legenda-item">
+                      <span>Boa</span>
+                      <span>75–89</span>
+                    </div>
+
+                    <div className="home-legenda-item">
+                      <span>Atenção</span>
+                      <span>50–74</span>
+                    </div>
+
+                    <div className="home-legenda-item">
+                      <span>Crítica</span>
+                      <span>0–49</span>
+                    </div>
+                  </div>
                 </div>
               </article>
 
@@ -430,9 +403,8 @@ export default function Dashboard() {
                 <div className="home-painel-cabecalho">
                   <div>
                     <h3>Resumo das manutenções</h3>
-                    <p>Acompanhamento das intervenções registradas.</p>
                   </div>
-                  <Link to="/manutencoes" className="home-link-painel">Ver todas <Icone nome="seta" tamanho={16} /></Link>
+                  <Link to="/manutencoes" className="home-link-painel">Ver todas <ChevronRight size={16} /></Link>
                 </div>
 
                 <div className="home-manutencao-total">
@@ -464,9 +436,8 @@ export default function Dashboard() {
                 <div className="home-painel-cabecalho">
                   <div>
                     <h3>Equipamentos cadastrados</h3>
-                    <p>Visão da saúde e da situação de todos os ativos. Menores Scores aparecem primeiro.</p>
                   </div>
-                  <Link to="/equipamentos" className="home-link-painel">Ver equipamentos <Icone nome="seta" tamanho={16} /></Link>
+                  <Link to="/equipamentos" className="home-link-painel">Ver equipamentos <ChevronRight size={16} /></Link>
                 </div>
 
                 {equipamentosOrdenados.length > 0 ? (
@@ -510,7 +481,7 @@ export default function Dashboard() {
                   </div>
                 ) : (
                   <div className="home-vazio">
-                    <span className="home-vazio-icone"><Icone nome="ativos" tamanho={22} /></span>
+                    <span className="home-vazio-icone"><PackageOpen size={22} /></span>
                     <strong>Nenhum equipamento cadastrado.</strong>
                     <p>Os ativos cadastrados aparecerão aqui com seu Score de saúde e status operacional.</p>
                   </div>
@@ -521,9 +492,8 @@ export default function Dashboard() {
                 <div className="home-painel-cabecalho">
                   <div>
                     <h3>Últimas manutenções</h3>
-                    <p>Intervenções mais recentes registradas.</p>
                   </div>
-                  <Link to="/manutencoes" className="home-link-painel">Ver todas <Icone nome="seta" tamanho={16} /></Link>
+                  <Link to="/manutencoes" className="home-link-painel">Ver todas <ChevronRight size={16} /></Link>
                 </div>
 
                 {ultimasManutencoes.length > 0 ? (

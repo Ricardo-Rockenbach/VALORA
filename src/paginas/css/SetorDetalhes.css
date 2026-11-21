@@ -100,7 +100,6 @@
   height: 66px;
   flex-shrink: 0;
   border-radius: 12px;
-  background: #f9e9dc;
   color: #c84e00;
 }
 
@@ -144,12 +143,10 @@
 }
 
 .sd-status--ativo {
-  background: #e3f2e6;
   color: #1e6835;
 }
 
 .sd-status--inativo {
-  background: #fce7e5;
   color: #b3150a;
 }
 
@@ -192,17 +189,14 @@
 }
 
 .sd-icone-equipamentos {
-  background: #f9e9dc;
   color: #c84e00;
 }
 
 .sd-icone-ativos {
-  background: #e3f2e6;
   color: #28723e;
 }
 
 .sd-icone-localizacoes {
-  background: #f7ead5;
   color: #9a6425;
 }
 
@@ -222,6 +216,26 @@
   font-size: 1.45rem;
   font-weight: 800;
 }
+
+.sd-icone,
+.sd-indicador-icone {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sd-editar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.sd-icone svg,
+.sd-indicador-icone svg {
+  flex-shrink: 0;
+}
+
 
 /* ---------- Cards de informações ---------- */
 .sd-card {
@@ -344,7 +358,6 @@
   padding: 28px !important;
   color: #9a7a60 !important;
   text-align: center;
-  font-style: italic;
 }
 
 /* ---------- Erros ---------- */

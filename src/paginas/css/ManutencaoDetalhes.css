@@ -64,7 +64,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #fff0e5;
   color: #c84e00;
   border-radius: 12px;
   flex-shrink: 0;
@@ -103,27 +102,22 @@
 }
 
 .md-status--aberta {
-  background: #fff0df;
   color: #bd5b0b;
 }
 
 .md-status--andamento {
-  background: #e6f1ff;
   color: #2765a5;
 }
 
 .md-status--analise {
-  background: #f0eaff;
   color: #7045aa;
 }
 
 .md-status--aguardando {
-  background: #fff7d9;
   color: #997300;
 }
 
 .md-status--concluida {
-  background: #e5f5e9;
   color: #347849;
 }
 
@@ -635,6 +629,30 @@
   font-size: 13px;
   margin-top: 10px;
 }
+
+
+.md-icone {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.md-botao-alterar,
+.md-botao-tarefa,
+.md-tarefa-botao {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.md-icone svg,
+.md-botao-alterar svg,
+.md-botao-tarefa svg,
+.md-tarefa-botao svg {
+  flex-shrink: 0;
+}
+
 
 @media (max-width: 650px) {
   .md-tarefa-item {

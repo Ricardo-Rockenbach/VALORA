@@ -1,6 +1,7 @@
 
 import { useEffect, useMemo, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
+import { Laptop, Printer, Server, Monitor, Computer, ClipboardList, History, Pencil, Plus } from 'lucide-react'
 
 import Sidebar from '../componentes/sidebar'
 
@@ -91,90 +92,27 @@ function IconeEquipamento({ equipamento }) {
     .replace(/[\u0300-\u036f]/g, '')
     .toLowerCase()
 
-  let icone
-
   if (tipo.includes('notebook') || tipo.includes('laptop')) {
-    icone = (
-      <>
-        <rect x="5" y="4" width="14" height="12" rx="1.5" />
-        <path d="M2 20h20l-2-4H4l-2 4Z" />
-      </>
-    )
-  } else if (tipo.includes('impressora')) {
-    icone = (
-      <>
-        <path d="M6 9V3h12v6" />
-        <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2" />
-        <path d="M6 14h12v7H6z" />
-        <path d="M18 12h.01" />
-      </>
-    )
-  } else if (tipo.includes('servidor')) {
-    icone = (
-      <>
-        <rect x="4" y="3" width="16" height="8" rx="2" />
-        <rect x="4" y="13" width="16" height="8" rx="2" />
-        <path d="M8 7h.01M8 17h.01" />
-        <path d="M12 7h5M12 17h5" />
-      </>
-    )
-  } else if (
-  tipo.includes('computador') ||
-  tipo.includes('desktop')
-) {
-  // Computador desktop: monitor + gabinete
-  icone = (
-    <>
-      <rect x="2" y="4" width="13" height="11" rx="1.5" />
-      <path d="M6 19h5M8.5 15v4" />
-
-      <rect x="17" y="5" width="5" height="15" rx="1" />
-      <circle cx="19.5" cy="17" r="0.7" />
-    </>
-  )
-} else if (tipo.includes('monitor')) {
-  // Monitor
-  icone = (
-    <>
-      <rect x="3" y="4" width="18" height="13" rx="2" />
-      <path d="M8 21h8M12 17v4" />
-    </>
-  )
-  } else if (
-    tipo.includes('monitor') ||
-    tipo.includes('computador') ||
-    tipo.includes('desktop')
-  ) {
-    icone = (
-      <>
-        <rect x="3" y="4" width="18" height="13" rx="2" />
-        <path d="M8 21h8M12 17v4" />
-      </>
-    )
-  } else {
-    icone = (
-      <>
-        <rect x="4" y="4" width="16" height="16" rx="3" />
-        <path d="M8 9h8M8 13h8M8 17h4" />
-      </>
-    )
+    return <Laptop size={28} strokeWidth={1.7} />
   }
 
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="28"
-      height="28"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.7"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      {icone}
-    </svg>
-  )
+  if (tipo.includes('impressora')) {
+    return <Printer size={28} strokeWidth={1.7} />
+  }
+
+  if (tipo.includes('servidor')) {
+    return <Server size={28} strokeWidth={1.7} />
+  }
+
+  if (tipo.includes('computador') || tipo.includes('desktop')) {
+    return <Computer size={28} strokeWidth={1.7} />
+  }
+
+  if (tipo.includes('monitor')) {
+    return <Monitor size={28} strokeWidth={1.7} />
+  }
+
+  return <ClipboardList size={28} strokeWidth={1.7} />
 }
 
 export default function EquipamentoDetalhes() {
@@ -350,7 +288,6 @@ export default function EquipamentoDetalhes() {
             </div>
 
             <h1>Detalhes do equipamento</h1>
-            <p>Consulte as informações e acompanhe a saúde do ativo.</p>
         </div>
 
         <div className="det-acoes-cabecalho">
@@ -360,13 +297,7 @@ export default function EquipamentoDetalhes() {
             className="det-botao-historico"
             onClick={() => setAbaAtiva('historico')}
             >
-            <svg width="16" height="16" viewBox="0 0 24 24"
-            fill="none" stroke="currentColor" strokeWidth="2"
-            strokeLinecap="round" strokeLinejoin="round">
-            <path d="M3 12a9 9 0 1 0 3-6.7L3 8" />
-            <path d="M3 3v5h5" />
-            <path d="M12 7v5l3 2" />
-            </svg>
+            <History size={18} strokeWidth={2} />
             Histórico
             </button>
 
@@ -374,12 +305,7 @@ export default function EquipamentoDetalhes() {
             to={`/equipamentos/${equipamento.id}/editar`}
             className="det-botao-editar"
             >
-            <svg width="16" height="16" viewBox="0 0 24 24"
-            fill="none" stroke="currentColor" strokeWidth="2"
-            strokeLinecap="round" strokeLinejoin="round">
-            <path d="M12 20h9" />
-            <path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L8 18l-4 1 1-4Z" />
-            </svg>
+            <Pencil size={16} strokeWidth={2} />
             Editar
             </Link>
 
@@ -420,7 +346,6 @@ export default function EquipamentoDetalhes() {
           <div className="det-titulo-secao">
             <div>
               <h2>Informações do equipamento</h2>
-              <p>Dados cadastrais e informações do ativo.</p>
             </div>
           </div>
 
@@ -498,7 +423,6 @@ export default function EquipamentoDetalhes() {
             <div>
               <span className="det-sobretitulo">ACOMPANHAMENTO DO ATIVO</span>
               <h2>Saúde do equipamento</h2>
-              <p>Acompanhe o histórico e os indicadores de conservação.</p>
             </div>
           </div>
 
@@ -799,7 +723,8 @@ export default function EquipamentoDetalhes() {
                   to="/manutencao/nova"
                   className="det-botao-adicionar"
                 >
-                  + Nova manutenção
+                  <Plus size={16} strokeWidth={2} />
+                   Nova manutenção
                 </Link>
               </div>
 

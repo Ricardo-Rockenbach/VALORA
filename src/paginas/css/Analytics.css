@@ -111,8 +111,8 @@
   padding: 0 13px;
   border: 1px solid #ddcec4;
   border-radius: 8px;
-  background: #fff;
-  color: #76513a;
+  background: var(--marrom-menu);
+  color: #fff;
   font: inherit;
   font-size: 0.82rem;
   font-weight: 700;
@@ -147,7 +147,7 @@
 
 .analytics-kpi {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   gap: 13px;
   min-width: 0;
   min-height: 112px;
@@ -170,18 +170,17 @@
 }
 
 .analytics-kpi--saude .analytics-kpi-icone {
-  background: #eaf6ed;
+
   color: #228344;
 }
 
 .analytics-kpi--alerta .analytics-kpi-icone {
-  background: #fff4df;
-  color: #b87508;
+  color: #b83228;
 }
 
 .analytics-kpi--manutencao .analytics-kpi-icone {
-  background: #f1edff;
-  color: #7053b4;
+
+  color: #8a3f00;
 }
 
 .analytics-kpi-conteudo {
@@ -258,7 +257,7 @@
   height: 36px;
   place-items: center;
   border-radius: 9px;
-  background: #fff2e9;
+  
   color: var(--analytics-primaria);
 }
 
@@ -547,9 +546,9 @@
   font-weight: 800;
 }
 
-.analytics-score-pill.analytics-score--excelente { background: #e9f6ed; }
-.analytics-score-pill.analytics-score--boa { background: #f0f6e5; }
-.analytics-score-pill.analytics-score--atencao { background: #fff5e1; }
+.analytics-score-pill.analytics-score--excelente 
+.analytics-score-pill.analytics-score--boa 
+.analytics-score-pill.analytics-score--atencao 
 .analytics-score-pill.analytics-score--critica { background: #fff0ef; }
 
 .analytics-recente-item {
@@ -600,9 +599,9 @@
   white-space: nowrap;
 }
 
-.analytics-status--aberta { background: #fff4df; color: #a66a08; }
-.analytics-status--andamento { background: #edf2ff; color: #4d65a9; }
-.analytics-status--concluida { background: #eaf6ed; color: #287a45; }
+.analytics-status--aberta {  color: #a66a08; }
+.analytics-status--andamento {  color: #4d65a9; }
+.analytics-status--concluida {  color: #287a45; }
 
 .analytics-grafico-vazio {
   display: grid;
@@ -638,6 +637,33 @@
   font-size: 0.7rem;
   line-height: 1.55;
 }
+
+
+/* Icones */
+
+/* Centralização dos ícones dos indicadores */
+.analytics-kpi-icone,
+.analytics-painel-icone {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Botão consultar equipamentos */
+.analytics-acao {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+/* Evita que os ícones sejam comprimidos */
+.analytics-kpi-icone svg,
+.analytics-painel-icone svg,
+.analytics-acao svg {
+  flex-shrink: 0;
+}
+
 
 @media (max-width: 1180px) {
   .analytics-kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); }

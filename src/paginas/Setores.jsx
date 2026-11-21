@@ -1,6 +1,11 @@
 import { useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { Search } from 'lucide-react'
+
 import Sidebar from '../componentes/sidebar'
+
+
+
 import { listarSetores, cadastrarSetor } from '../servicos/setorServico'
 import { listarLocalizacoes } from '../servicos/localizacaoServico'
 import './css/Home.css' // layout e sidebar compartilhados (o mesmo CSS do Equipamentos.jsx)
@@ -138,7 +143,9 @@ export default function Setores() {
 
         <div className="st-barra">
           <label className="st-busca">
+            <Search size={18} />
             <input
+            
               type="search"
               placeholder="Buscar"
               aria-label="Buscar setor"

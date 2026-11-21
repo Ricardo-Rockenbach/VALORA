@@ -1,9 +1,17 @@
 import { useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { Search, ChevronDown, CalendarDays } from "lucide-react";
+
 import Sidebar from '../componentes/sidebar'
+
+
+
 import { listarEquipamentos } from '../servicos/equipamentoServico'
 import { listarSetores } from '../servicos/setorServico'
 import { listarFornecedores } from '../servicos/fornecedorServico'
+
+
+
 import './css/Home.css' // layout, cards e sidebar compartilhados
 import './css/Equipamentos.css'
 
@@ -15,40 +23,7 @@ const classeStatus = {
   Inativo: 'eq-status--inativo',
 }
 
-function Icone({ nome, tamanho = 18 }) {
-  const formas = {
-    busca: (
-      <>
-        <circle cx="11" cy="11" r="7" />
-        <path d="M21 21l-4.3-4.3" />
-      </>
-    ),
-    chevron: <path d="M6 9l6 6 6-6" />,
-    calendario: (
-      <>
-        <rect x="3" y="4" width="18" height="17" rx="2" />
-        <path d="M3 10h18M8 2v4M16 2v4" />
-      </>
-    ),
-    filtro: <path d="M4 6h16M7 12h10M10 18h4" />,
-  }
 
-  return (
-    <svg
-      width={tamanho}
-      height={tamanho}
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-    >
-      {formas[nome]}
-    </svg>
-  )
-}
 
 
 function Filtro({ rotulo, valor, onChange, opcoes, icone }) {
@@ -56,20 +31,48 @@ function Filtro({ rotulo, valor, onChange, opcoes, icone }) {
     <label className="eq-filtro">
       <span className="eq-filtro-rotulo">
         {rotulo}
-        {icone && <Icone nome={icone} tamanho={12} />}
+        {icone && icone}
       </span>
-      <select value={valor} onChange={(e) => onChange(e.target.value)}>
+
+      <select
+        value={valor}
+        onChange={(e) => onChange(e.target.value)}
+      >
         {opcoes.map((opcao) => (
-          <option key={opcao} value={opcao === 'Todos' ? '' : opcao}>
+          <option
+            key={opcao}
+            value={opcao === 'Todos' ? '' : opcao}
+          >
             {opcao}
           </option>
         ))}
       </select>
+
       <span className="eq-filtro-seta">
-        <Icone nome="chevron" tamanho={16} />
+        <ChevronDown size={16} />
       </span>
     </label>
-  )
+  );
+}
+
+function calcularDataLimite(periodo) {
+  if (!periodo) return null
+
+  const dias = {
+    'Últimos 7 dias': 7,
+    'Últimos 30 dias': 30,
+    'Últimos 12 meses': 365,
+  }
+
+  const quantidade = dias[periodo]
+
+  if (!quantidade) return null
+
+  const data = new Date()
+  data.setHours(0, 0, 0, 0)
+  data.setDate(data.getDate() - (quantidade - 1))
+
+  return data.toLocaleDateString('sv-SE')
 }
 
 export default function Equipamentos() {
@@ -81,7 +84,7 @@ export default function Equipamentos() {
 
   const [busca, setBusca] = useState('')
   const [status, setStatus] = useState('')
-  const [prioridade, setPrioridade] = useState('')
+  const [tipo, setTipo] = useState('')
   const [periodo, setPeriodo] = useState('')
 
   useEffect(() => {
@@ -122,39 +125,58 @@ export default function Equipamentos() {
   carregarFornecedores()
 }, [])
 
-  // Filtragem dos equipamentos
-      const listaFiltrada = useMemo(() => {
-        const termo = busca.trim().toLowerCase()
+// Filtragem dos equipamentos
+const listaFiltrada = useMemo(() => {
+  const termo = busca.trim().toLowerCase()
+  const dataLimite = calcularDataLimite(periodo)
 
-        return equipamentos
-          .map((e) => {
-            const setor = setores.find(
-              (s) => Number(s.id) === Number(e.setorId)
-            )
+  return equipamentos
+    .map((e) => {
+      const setor = setores.find(
+        (s) => Number(s.id) === Number(e.setorId)
+      )
 
-            return {
-              ...e,
-              setorNome: setor?.nome || 'Setor não encontrado',
-            }
-          })
-          .filter((e) => {
-            const bateStatus = !status || e.status === status
+      return {
+        ...e,
+        setorNome: setor?.nome || 'Setor não encontrado',
+      }
+    })
+    .filter((e) => {
+      const bateStatus =
+        !status || e.status === status
 
-            const bateBusca =
-              !termo ||
-              [
-                e.patrimonio,
-                e.nome,
-                e.setorNome,
-                e.tipo,
-                e.marca,
-              ].some((campo) =>
-                String(campo ?? '').toLowerCase().includes(termo)
-              )
+      const bateTipo =
+        !tipo || e.tipo === tipo
 
-            return bateStatus && bateBusca
-          })
-      }, [equipamentos, setores, busca, status])
+      const bateBusca =
+        !termo ||
+        [
+          e.patrimonio,
+          e.nome,
+          e.setorNome,
+          e.tipo,
+          e.marca,
+        ].some((campo) =>
+          String(campo ?? '').toLowerCase().includes(termo)
+        )
+
+      const batePeriodo =
+        !dataLimite ||
+        (
+          e.dataAquisicao &&
+          String(e.dataAquisicao).slice(0, 10) >= dataLimite &&
+          String(e.dataAquisicao).slice(0, 10) <=
+            new Date().toLocaleDateString('sv-SE')
+        )
+
+      return (
+        bateStatus &&
+        bateTipo &&
+        bateBusca &&
+        batePeriodo
+      )
+    })
+}, [equipamentos, setores, busca, status, tipo, periodo])
 
       // Cards de resumo
       const resumo = [
@@ -203,7 +225,7 @@ export default function Equipamentos() {
           {/* Busca e Filtros */}
         <section className="eq-filtros" aria-label="Filtros">
           <label className="eq-busca">
-            <Icone nome="busca" />
+            <Search size={18} />
             <input
               type="search"
               placeholder="buscar"
@@ -213,28 +235,44 @@ export default function Equipamentos() {
           </label>
 
           <Filtro
-            rotulo="Status"
-            valor={status}
-            onChange={setStatus}
-            opcoes={['Todos', 'Ativo', 'Em manutenção', 'Inativo']}
+            rotulo="Tipo"
+            valor={tipo}
+            onChange={setTipo}
+            opcoes={[
+              'Todos',
+              ...new Set(
+                equipamentos
+                  .map((e) => e.tipo)
+                  .filter(Boolean)
+              ),
+            ]}
           />
-          <Filtro
-            rotulo="Prioridade"
-            valor={prioridade}
-            onChange={setPrioridade}
-            opcoes={['Todos', 'Baixa', 'Média', 'Alta']}
-          />
+            <Filtro
+              rotulo="Status"
+              valor={status}
+              onChange={setStatus}
+              opcoes={['Todos', 'Ativo', 'Em manutenção', 'Inativo']}
+            />
           <Filtro
             rotulo="Período"
-            icone="calendario"
+            icone={<CalendarDays size={12} />}
             valor={periodo}
             onChange={setPeriodo}
             opcoes={['Todos', 'Últimos 7 dias', 'Últimos 30 dias', 'Últimos 12 meses']}
           />
 
-          <button type="button" className="eq-botao-filtros">
-            <Icone nome="filtro" /> Filtros
-          </button>
+            <button
+              type="button"
+              className="eq-limpar-filtros"
+              onClick={() => {
+                setBusca('')
+                setStatus('')
+                setTipo('')
+                setPeriodo('')
+              }}
+            >
+              Limpar filtros
+            </button>
         </section>
           {/* Tabela de Equipamentos */}
         <div className="eq-tabela-caixa">

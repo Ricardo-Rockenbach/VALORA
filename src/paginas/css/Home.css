@@ -152,9 +152,9 @@
 }
 
 .dash-conteudo h2 {
-  font-size: 2.4rem;
-  font-style: roboto mono, monospace;
-  font-weight: 800;
+  font-size: 36px;
+  font-family: "Roboto Mono", monospace;
+  font-weight: 700;
 }
 
 .dash-subtitulo {
@@ -389,22 +389,22 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 9px;
-  min-height: 42px;
-  padding: 0 16px;
-  border-radius: 9px;
-  background: #8a3f00;
+  gap: 10px;
+
+  padding: 8px 15px;
+  border-radius: 5px;
+
+  background: #8b3d00;
   color: #fff;
-  font-size: 0.88rem;
-  font-weight: 700;
+
+  font-size: 14px;
+  font-weight: 600;
   text-decoration: none;
   white-space: nowrap;
-  transition: background 0.2s, transform 0.2s;
 }
 
 .home-acao-principal:hover {
   background: #6b3000;
-  transform: translateY(-1px);
 }
 
 .home-secao {
@@ -453,36 +453,36 @@
   min-height: 116px;
   padding: 17px 15px;
   border: 1px solid #eadfd5;
-  border-radius: 13px;
+  border-radius: 8px;
   background: #fff;
   box-shadow: 0 3px 12px rgba(77, 43, 18, 0.045);
 }
 
 .home-kpi-icone {
   display: inline-flex;
+  display: flex;
   align-items: center;
   justify-content: center;
+  align-self: center;
+
   width: 42px;
   height: 42px;
   flex: 0 0 42px;
-  border-radius: 11px;
-  background: #f4e9df;
+
+  background: transparent;
   color: #8a3f00;
 }
 
 .home-kpi--saude .home-kpi-icone,
 .home-kpi--positivo .home-kpi-icone {
-  background: #e6f4e9;
   color: #287443;
 }
 
 .home-kpi--aviso .home-kpi-icone {
-  background: #fff2d9;
   color: #a76500;
 }
 
 .home-kpi--critico .home-kpi-icone {
-  background: #fde9e7;
   color: #b83228;
 }
 
@@ -519,13 +519,14 @@
   grid-template-columns: minmax(0, 1.25fr) minmax(300px, 0.75fr);
   gap: 18px;
   margin-bottom: 18px;
+  align-items: start;
 }
 
 .home-painel {
   min-width: 0;
   padding: 20px;
   border: 1px solid #eadfd5;
-  border-radius: 14px;
+  border-radius: 5px;
   background: #fff;
   box-shadow: 0 3px 12px rgba(77, 43, 18, 0.045);
 }
@@ -542,16 +543,10 @@
   font-size: 0.79rem;
 }
 
-.home-painel-icone {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 38px;
-  height: 38px;
-  flex: 0 0 38px;
-  border-radius: 10px;
-  background: #f4e9df;
-  color: #8a3f00;
+.home-painel-icone,
+.home-vazio-icone {
+  background: transparent;
+  border-radius: 0;
 }
 
 .home-distribuicao {
@@ -617,15 +612,45 @@
   transition: width 0.25s ease;
 }
 
+/* Legenda de classificação */
 .home-legenda-score {
+  margin-top: 20px;
+  padding-top: 14px;
+  border-top: 1px solid #eee4dc;
+}
+
+.home-legenda-titulo {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #8b7567;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+}
+
+.home-legenda-faixas {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px 24px;
+}
+
+.home-legenda-item {
   display: flex;
-  flex-wrap: wrap;
-  gap: 7px 14px;
-  margin-top: 17px;
-  padding-top: 13px;
-  border-top: 1px solid #f0e8e1;
-  color: #8b7b6e;
-  font-size: 0.68rem;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 12px;
+}
+
+.home-legenda-item span:first-child {
+  color: #573b2c;
+  font-weight: 500;
+}
+
+.home-legenda-item span:last-child {
+  color: #967d6d;
+  font-variant-numeric: tabular-nums;
 }
 
 .home-link-painel {
@@ -650,7 +675,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 14px 15px;
-  border-radius: 10px;
+  border-radius: 5px;
   background: #fbf5ef;
 }
 
@@ -770,7 +795,6 @@
 .home-pill--boa,
 .home-pill--ativo,
 .home-pill--concluida {
-  background: #e8f4eb;
   color: #287443;
 }
 
@@ -820,24 +844,13 @@
   line-height: 1.5;
 }
 
-.home-vazio-icone {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background: #e8f4eb;
-  color: #287443;
-}
-
 .home-estado {
   display: flex;
   flex-direction: column;
   gap: 5px;
   padding: 22px;
   border: 1px solid #eadfd5;
-  border-radius: 12px;
+  border-radius: 5px;
   background: #fff;
   color: #6b5748;
 }
