@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { Monitor, HeartPulse, Wrench, TriangleAlert, ChartNoAxesCombined } from 'lucide-react'
 
 import Sidebar from '../componentes/sidebar'
 import { listarEquipamentos } from '../servicos/equipamentoServico'
@@ -129,26 +130,15 @@ function gerarSerieTemporal(manutencoes, periodo, hoje) {
   return serie
 }
 
-function Icone({ nome, tamanho = 21 }) {
-  const formas = {
-    ativos: <><rect x="3" y="4" width="18" height="13" rx="2" /><path d="M8 21h8M12 17v4" /></>,
-    saude: <><path d="M20.8 8.8c0 5.1-8.8 11-8.8 11s-8.8-5.9-8.8-11A4.8 4.8 0 0 1 12 6.2a4.8 4.8 0 0 1 8.8 2.6Z" /><path d="M7.5 12h3l1.5-3 2 6 1.5-3h1.5" /></>,
-    manutencao: <path d="M14.7 6.3a4 4 0 0 0-5.4 5.2L3 17.8V21h3.2l6.3-6.3a4 4 0 0 0 5.2-5.4l-2.6 2.6-2.5-.5-.5-2.5z" />,
-    alerta: <><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z" /><path d="M12 9v4M12 17h.01" /></>,
-    tendencia: <><path d="M3 3v18h18" /><path d="m7 14 4-4 3 3 6-7" /><path d="M15 6h5v5" /></>,
-  }
 
-  return (
-    <svg width={tamanho} height={tamanho} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      {formas[nome]}
-    </svg>
-  )
-}
 
-function Indicador({ icone, rotulo, valor, detalhe, cor }) {
+function Indicador({ icone: Icone, rotulo, valor, detalhe, cor }) {
   return (
     <article className={`analytics-kpi analytics-kpi--${cor}`}>
-      <span className="analytics-kpi-icone"><Icone nome={icone} /></span>
+      <span className="analytics-kpi-icone">
+        <Icone size={21} strokeWidth={1.8} />
+      </span>
+
       <div className="analytics-kpi-conteudo">
         <span>{rotulo}</span>
         <strong>{valor}</strong>
@@ -379,12 +369,11 @@ export default function Analytics() {
       <main className="dash-conteudo analytics-pagina">
         <header className="analytics-cabecalho">
           <div>
-            <span className="analytics-sobretitulo">INTELIGÊNCIA E ACOMPANHAMENTO</span>
             <h2 className="dash-titulo">Analytics</h2>
             <p>Analise a saúde dos ativos e o comportamento das manutenções cadastradas.</p>
           </div>
           <Link to="/equipamentos" className="analytics-acao">
-            <Icone nome="ativos" tamanho={18} />
+            <Monitor size={18} strokeWidth={1.8} />
             Consultar equipamentos
           </Link>
         </header>
@@ -425,22 +414,43 @@ export default function Analytics() {
         ) : (
           <>
             <div className="analytics-contexto">
-              <span>Resultados para <strong>{equipamentosFiltrados.length}</strong> equipamento(s)</span>
-              <span>Manutenções: <strong>{periodoLegenda.toLowerCase()}</strong></span>
             </div>
 
             <section className="analytics-kpis" aria-label="Indicadores gerais">
-              <Indicador icone="ativos" rotulo="Equipamentos analisados" valor={formatarNumero(resumo.totalEquipamentos)} detalhe="Ativos conforme filtros selecionados" cor="neutro" />
-              <Indicador icone="saude" rotulo="Saúde média" valor={`${resumo.saudeMedia}/100`} detalhe="Score calculado com todo o histórico" cor="saude" />
-              <Indicador icone="alerta" rotulo="Saúde em atenção ou crítica" valor={formatarNumero(resumo.emAtencao + resumo.criticos)} detalhe={`${resumo.criticos} em situação crítica`} cor="alerta" />
-              <Indicador icone="manutencao" rotulo="Manutenções no período" valor={formatarNumero(resumo.totalManutencoes)} detalhe={`${resumo.abertas} abertas · ${resumo.emAndamento} em andamento`} cor="manutencao" />
+              <Indicador
+                icone={Monitor}
+                rotulo="Equipamentos analisados"
+                valor={formatarNumero(resumo.totalEquipamentos)}
+                cor="neutro"
+              />
+
+              <Indicador
+                icone={HeartPulse}
+                rotulo="Saúde média"
+                valor={`${resumo.saudeMedia}/100`}
+                cor="saude"
+              />
+
+              <Indicador
+                icone={TriangleAlert}
+                rotulo="Saúde em atenção ou crítica"
+                valor={formatarNumero(resumo.emAtencao + resumo.criticos)}
+                cor="alerta"
+              />
+
+              <Indicador
+                icone={Wrench}
+                rotulo="Manutenções no período"
+                valor={formatarNumero(resumo.totalManutencoes)}
+                cor="manutencao"
+              />
             </section>
 
             <section className="analytics-grade-graficos">
               <article className="analytics-painel">
                 <div className="analytics-painel-cabecalho">
-                  <div><h3>Distribuição da saúde</h3><p>Classificação atual do Score por equipamento.</p></div>
-                  <span className="analytics-painel-icone"><Icone nome="saude" /></span>
+                  <div><h3>Distribuição da saúde</h3></div>
+                  <span className="analytics-painel-icone"><HeartPulse size={21} strokeWidth={1.8} /></span>
                 </div>
                 <DistribuicaoSaude dados={distribuicaoSaude} total={resumo.totalEquipamentos} />
                 <div className="analytics-faixas-legenda">
@@ -450,8 +460,8 @@ export default function Analytics() {
 
               <article className="analytics-painel">
                 <div className="analytics-painel-cabecalho">
-                  <div><h3>Volume de manutenções</h3><p>Registros por semana ou mês, conforme o período.</p></div>
-                  <span className="analytics-painel-icone"><Icone nome="tendencia" /></span>
+                  <div><h3>Volume de manutenções</h3></div>
+                  <span className="analytics-painel-icone"><ChartNoAxesCombined size={21} strokeWidth={1.8} /></span>
                 </div>
                 <GraficoBarras dados={serieTemporal} />
               </article>
@@ -460,7 +470,7 @@ export default function Analytics() {
             <section className="analytics-grade-secundaria">
               <article className="analytics-painel">
                 <div className="analytics-painel-cabecalho">
-                  <div><h3>Tipos de manutenção</h3><p>Participação de cada tipo nos registros do período.</p></div>
+                  <div><h3>Tipos de manutenção</h3></div>
                 </div>
                 {manutencoesPorTipo.length ? (
                   <div className="analytics-tipos-lista">
@@ -479,7 +489,7 @@ export default function Analytics() {
 
               <article className="analytics-painel">
                 <div className="analytics-painel-cabecalho">
-                  <div><h3>Saúde média por setor</h3><p>Comparação dos equipamentos vinculados a cada setor.</p></div>
+                  <div><h3>Saúde média por setor</h3></div>
                 </div>
                 {resumoPorSetor.length ? (
                   <div className="analytics-setores-lista">
@@ -498,7 +508,7 @@ export default function Analytics() {
             <section className="analytics-grade-tabelas">
               <article className="analytics-painel">
                 <div className="analytics-painel-cabecalho">
-                  <div><h3>Equipamentos que exigem atenção</h3><p>Ativos ordenados do menor para o maior Score.</p></div>
+                  <div><h3>Equipamentos</h3></div>
                   <Link to="/equipamentos" className="analytics-link">Ver todos</Link>
                 </div>
                 {equipamentosPrioritarios.length ? (
@@ -524,7 +534,7 @@ export default function Analytics() {
 
               <article className="analytics-painel">
                 <div className="analytics-painel-cabecalho">
-                  <div><h3>Manutenções recentes</h3><p>Últimos registros dentro do período selecionado.</p></div>
+                  <div><h3>Manutenções recentes</h3></div>
                   <Link to="/manutencoes" className="analytics-link">Ver todas</Link>
                 </div>
                 {manutencoesRecentes.length ? (

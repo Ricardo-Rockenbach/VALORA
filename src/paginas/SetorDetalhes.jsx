@@ -1,6 +1,8 @@
 
 import { useEffect, useMemo, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
+import { Pencil, Building2, Monitor, CircleCheck, MapPin } from 'lucide-react'
+
 import Sidebar from '../componentes/sidebar'
 
 import { listarSetores } from '../servicos/setorServico'
@@ -136,18 +138,7 @@ export default function SetorDetalhes() {
               to={`/setores/${setor.id}/editar`}
               className="sd-editar"
             >
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                aria-hidden="true"
-              >
-                <path d="M12 20h9" />
-                <path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L8 18l-4 1 1-4Z" />
-              </svg>
+              <Pencil size={16} strokeWidth={2} />
               Editar
             </Link>
 
@@ -160,21 +151,7 @@ export default function SetorDetalhes() {
         {/* Identificação do setor */}
         <section className="sd-identificacao">
           <div className="sd-icone">
-            <svg
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.7"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              aria-hidden="true"
-            >
-              <path d="M3 21h18" />
-              <path d="M5 21V7l8-4v18" />
-              <path d="M13 10h6v11" />
-              <path d="M8 9v.01M8 12v.01M8 15v.01M8 18v.01" />
-              <path d="M16 14v.01M16 17v.01" />
-            </svg>
+            <Building2 size={28} strokeWidth={1.7} />
           </div>
 
           <div className="sd-identificacao-info">
@@ -194,10 +171,7 @@ export default function SetorDetalhes() {
         <section className="sd-indicadores">
           <article className="sd-indicador">
             <div className="sd-indicador-icone sd-icone-equipamentos">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
-                <rect x="3" y="4" width="18" height="13" rx="2" />
-                <path d="M8 21h8M12 17v4" />
-              </svg>
+             <Monitor size={24} strokeWidth={1.8} />
             </div>
 
             <div>
@@ -208,17 +182,7 @@ export default function SetorDetalhes() {
 
           <article className="sd-indicador">
             <div className="sd-indicador-icone sd-icone-ativos">
-                <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2.2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                >
-                <circle cx="12" cy="12" r="9" />
-                <path d="m8.5 12 2.3 2.3 4.8-5" />
-                </svg>
+                <CircleCheck size={24} strokeWidth={1.8} />
             </div>
 
             <div>
@@ -229,10 +193,7 @@ export default function SetorDetalhes() {
 
           <article className="sd-indicador">
             <div className="sd-indicador-icone sd-icone-localizacoes">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
-                <path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z" />
-                <circle cx="12" cy="10" r="2.5" />
-              </svg>
+              <MapPin size={24} strokeWidth={1.8} />
             </div>
 
             <div>

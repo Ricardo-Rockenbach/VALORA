@@ -235,10 +235,6 @@ export default function ManutencaoEditar() {
       <main className="dash-conteudo">
         <h2 className="dash-titulo">Editar Manutenção</h2>
 
-        <p>
-          Atualize as informações e o andamento deste chamado.
-        </p>
-
         {carregando ? (
           <p>Carregando dados da manutenção...</p>
         ) : erro && !form.descricaoProblema && !form.equipamentoId ? (

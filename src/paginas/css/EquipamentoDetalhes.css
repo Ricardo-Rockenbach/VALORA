@@ -1,5 +1,5 @@
 
-/* ==========================================
+/* ==========================================a
    VALORA - DETALHES DO EQUIPAMENTO
    ========================================== */
 
@@ -15,7 +15,7 @@
   min-width: 0;
   padding: 30px 34px;
   overflow-x: hidden;
-  color: #493528;
+  color: #0a0501;
 }
 
 /* ==========================================
@@ -129,6 +129,27 @@
   border-color: #A94100;
 }
 
+.det-equipamento-icone {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.det-botao-historico,
+.det-botao-editar,
+.det-botao-adicionar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.det-botao-historico svg,
+.det-botao-editar svg,
+.det-botao-adicionar svg {
+  flex-shrink: 0;
+}
+
 /* ==========================================
    PADRÃO DOS CARDS
    ========================================== */
@@ -161,7 +182,7 @@
   background: #FFFFFF;
   border: 1px solid #E8DCCF;
   border-left: 4px solid #C84E00;
-  border-radius: 10px;
+  border-radius: 5px;
 }
 
 .det-equipamento-icone {
@@ -217,17 +238,17 @@
 }
 
 .det-status--ativo {
-  background: #E5F1E7;
+  background: transparent;
   color: #39734A;
+  font-weight: 700;
+  font-size: 15px;
 }
 
 .det-status--manutencao {
-  background: #FFF0D9;
   color: #A76A16;
 }
 
 .det-status--inativo {
-  background: #F4E5E2;
   color: #A34D40;
 }
 

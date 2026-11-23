@@ -1,6 +1,8 @@
 
 import { useEffect, useMemo, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
+import { MapPin, Pencil } from 'lucide-react'
+
 import Sidebar from '../componentes/sidebar'
 
 import { listarLocalizacoes } from '../servicos/localizacaoServico'
@@ -19,24 +21,6 @@ function InfoItem({ titulo, valor }) {
   )
 }
 
-function IconeLocalizacao() {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="28"
-      height="28"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.7"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z" />
-      <circle cx="12" cy="10" r="2.5" />
-    </svg>
-  )
-}
 
 function classeStatus(status) {
   const valor = (status || '').toLowerCase()
@@ -188,19 +172,7 @@ export default function LocalizacaoDetalhes() {
               to={`/localizacoes/${localizacao.id}/editar`}
               className="det-botao-editar"
             >
-              <svg
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path d="M12 20h9" />
-                <path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L8 18l-4 1 1-4Z" />
-              </svg>
+              <Pencil size={16} strokeWidth={2} />
               Editar
             </Link>
 
@@ -213,7 +185,7 @@ export default function LocalizacaoDetalhes() {
         {/* Identificação principal */}
         <section className="det-card det-identificacao">
           <div className="det-equipamento-icone">
-            <IconeLocalizacao />
+            <MapPin size={28} strokeWidth={1.7} />
           </div>
 
           <div className="det-identificacao-texto">

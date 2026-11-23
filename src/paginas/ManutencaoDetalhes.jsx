@@ -1,16 +1,13 @@
 
 import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
+import {Wrench, Plus, Pencil, Trash2 } from 'lucide-react'
+
 import Sidebar from '../componentes/sidebar'
 
 import { listarManutencoes } from '../servicos/manutencaoServico'
 import { listarEquipamentos } from '../servicos/equipamentoServico'
-import {
-  listarTarefas,
-  cadastrarTarefa,
-  atualizarTarefa,
-  excluirTarefa,
-} from '../servicos/tarefaServico'
+import {listarTarefas, cadastrarTarefa, atualizarTarefa, excluirTarefa, } from '../servicos/tarefaServico'
 
 import './css/Home.css'
 import './css/EquipamentoDetalhes.css'
@@ -83,80 +80,9 @@ function Info({ titulo, valor }) {
   )
 }
 
-function IconeManutencao() {
-  return (
-    <svg
-      width="30"
-      height="30"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.7"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M14.7 6.3a5 5 0 0 0-6.4 6.4L3 18l3 3 5.3-5.3a5 5 0 0 0 6.4-6.4l-3 3-3-3z" />
-      <path d="m16 5 3-3" />
-    </svg>
-  )
-}
 
-function IconeAdicionar() {
-  return (
-    <svg
-      width="16"
-      height="16"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M12 5v14" />
-      <path d="M5 12h14" />
-    </svg>
-  )
-}
 
-function IconeEditar() {
-  return (
-    <svg
-      width="16"
-      height="16"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M12 20h9" />
-      <path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L8 18l-4 1 1-4Z" />
-    </svg>
-  )
-}
 
-function IconeExcluir() {
-  return (
-    <svg
-      width="16"
-      height="16"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.8"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M3 6h18" />
-      <path d="M8 6V4h8v2" />
-      <path d="m19 6-1 14H6L5 6" />
-      <path d="M10 11v5" />
-      <path d="M14 11v5" />
-    </svg>
-  )
-}
 
 export default function ManutencaoDetalhes() {
   const { id } = useParams()
@@ -382,9 +308,6 @@ export default function ManutencaoDetalhes() {
               Detalhes da manutenção
             </h2>
 
-            <p>
-              Consulte as informações e o andamento deste chamado.
-            </p>
           </div>
 
           <div className="md-acoes-cabecalho">
@@ -392,7 +315,7 @@ export default function ManutencaoDetalhes() {
               to={`/manutencoes/${manutencao.id}/editar`}
               className="md-botao-alterar"
             >
-              <IconeEditar />
+              <Pencil size={16} strokeWidth={2} />
               Alterar
             </Link>
 
@@ -401,7 +324,7 @@ export default function ManutencaoDetalhes() {
               className="md-botao-tarefa"
               onClick={abrirNovaTarefa}
             >
-              <IconeAdicionar />
+              <Plus size={16} strokeWidth={2} />
               Adicionar tarefa
             </button>
 
@@ -417,7 +340,7 @@ export default function ManutencaoDetalhes() {
         {/* Identificação */}
         <section className="md-identificacao">
           <div className="md-icone">
-            <IconeManutencao />
+            <Wrench size={30} strokeWidth={1.7} />
           </div>
 
           <div className="md-identificacao-texto">
@@ -472,7 +395,6 @@ export default function ManutencaoDetalhes() {
         <section className="md-secao">
           <div className="md-titulo-secao">
             <h2>Informações da manutenção</h2>
-            <p>Dados registrados na abertura do chamado.</p>
           </div>
 
           <div className="md-card">
@@ -514,9 +436,6 @@ export default function ManutencaoDetalhes() {
         <section className="md-secao">
           <div className="md-titulo-secao">
             <h2>Equipamento relacionado</h2>
-            <p>
-              Informações do ativo que necessita de manutenção.
-            </p>
           </div>
 
           <div className="md-card">
@@ -570,7 +489,6 @@ export default function ManutencaoDetalhes() {
         <section className="md-secao">
           <div className="md-titulo-secao">
             <h2>Descrição do problema</h2>
-            <p>Relato informado no momento da abertura.</p>
           </div>
 
           <div className="md-card md-texto-card">
@@ -585,7 +503,6 @@ export default function ManutencaoDetalhes() {
         <section className="md-secao">
           <div className="md-titulo-secao">
             <h2>Observações</h2>
-            <p>Informações complementares sobre o chamado.</p>
           </div>
 
           <div className="md-card md-texto-card">
@@ -600,9 +517,6 @@ export default function ManutencaoDetalhes() {
         <section className="md-secao">
           <div className="md-titulo-secao">
             <h2>Tarefas da manutenção</h2>
-            <p>
-              Atividades relacionadas à execução deste chamado.
-            </p>
           </div>
 
           <div className="md-card md-tarefas">
@@ -616,7 +530,7 @@ export default function ManutencaoDetalhes() {
                 className="md-botao-tarefa"
                 onClick={abrirNovaTarefa}
               >
-                <IconeAdicionar />
+                <Plus size={16} strokeWidth={2} />
                 Adicionar tarefa
               </button>
             </div>
@@ -648,7 +562,7 @@ export default function ManutencaoDetalhes() {
                         title="Alterar tarefa"
                         disabled={excluindoTarefa !== null}
                       >
-                        <IconeEditar />
+                        <Pencil size={16} strokeWidth={2} />
                         Alterar
                       </button>
 
@@ -659,7 +573,7 @@ export default function ManutencaoDetalhes() {
                         title="Excluir tarefa"
                         disabled={excluindoTarefa !== null}
                       >
-                        <IconeExcluir />
+                        <Trash2 size={16} strokeWidth={1.8} />
                         {excluindoTarefa === tarefa.id
                           ? 'Excluindo...'
                           : 'Excluir'}
@@ -738,9 +652,9 @@ export default function ManutencaoDetalhes() {
                   disabled={!novaTarefa.trim() || salvandoTarefa}
                 >
                   {tarefaEditando ? (
-                    <IconeEditar />
+                    <Pencil size={16} strokeWidth={2} />
                   ) : (
-                    <IconeAdicionar />
+                    <Plus size={16} strokeWidth={2} />
                   )}
 
                   {salvandoTarefa

@@ -1,9 +1,15 @@
 
 import { useEffect, useMemo, useState } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
+import { Search, ChevronDown, CalendarDays, ListFilter } from 'lucide-react'
+
 import Sidebar from '../componentes/sidebar'
+
+
 import { listarManutencoes } from '../servicos/manutencaoServico'
 import { listarEquipamentos } from '../servicos/equipamentoServico'
+
+
 import './css/Home.css'
 import './css/Manutencoes.css'
 
@@ -80,47 +86,22 @@ function formatarData(iso) {
   return `${dia}/${mes}/${ano}`
 }
 
-function Icone({ nome, tamanho = 18 }) {
-  const formas = {
-    busca: (
-      <>
-        <circle cx="11" cy="11" r="7" />
-        <path d="M21 21l-4.3-4.3" />
-      </>
-    ),
-    chevron: <path d="M6 9l6 6 6-6" />,
-    calendario: (
-      <>
-        <rect x="3" y="4" width="18" height="17" rx="2" />
-        <path d="M3 10h18M8 2v4M16 2v4" />
-      </>
-    ),
-    filtro: <path d="M4 6h16M7 12h10M10 18h4" />,
-  }
 
-  return (
-    <svg
-      width={tamanho}
-      height={tamanho}
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-    >
-      {formas[nome]}
-    </svg>
-  )
-}
-
-function Filtro({ rotulo, valor, onChange, opcoes, icone, disabled = false }) {
+function Filtro({
+  rotulo,
+  valor,
+  onChange,
+  opcoes,
+  icone,
+  disabled = false
+}) {
   return (
     <label className="mt-filtro">
       <span className="mt-filtro-rotulo">
         {rotulo}
-        {icone && <Icone nome={icone} tamanho={12} />}
+        {icone === 'calendario' && (
+          <CalendarDays size={12} strokeWidth={2} />
+        )}
       </span>
 
       <select
@@ -138,7 +119,7 @@ function Filtro({ rotulo, valor, onChange, opcoes, icone, disabled = false }) {
       </select>
 
       <span className="mt-filtro-seta">
-        <Icone nome="chevron" tamanho={16} />
+        <ChevronDown size={16} strokeWidth={2} />
       </span>
     </label>
   )
@@ -288,7 +269,7 @@ export default function Manutencoes() {
 
             <section className="mt-filtros" aria-label="Filtros">
               <label className="mt-busca">
-                <Icone nome="busca" />
+                <Search size={18} strokeWidth={2} />
 
                 <input
                   type="search"
@@ -331,7 +312,7 @@ export default function Manutencoes() {
                   setPeriodo('')
                 }}
               >
-                <Icone nome="filtro" /> Limpar filtros
+                Limpar filtros
               </button>
             </section>
 

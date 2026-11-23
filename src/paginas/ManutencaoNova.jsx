@@ -1,13 +1,16 @@
 
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import {Search, FileText, ArrowRight } from 'lucide-react'
+
 import Sidebar from '../componentes/sidebar'
+
+
 import { listarEquipamentos } from '../servicos/equipamentoServico'
 import { listarSetores } from '../servicos/setorServico'
-import {
-  listarManutencoes,
-  cadastrarManutencao,
-} from '../servicos/manutencaoServico'
+import { listarManutencoes, cadastrarManutencao, } from '../servicos/manutencaoServico'
+
+
 import './css/Home.css'
 import './css/ManutencaoNova.css'
 
@@ -54,39 +57,6 @@ function formatarStatus(status) {
   return equivalencias[valor] || status
 }
 
-function Icone({ nome, tamanho = 18 }) {
-  const formas = {
-    busca: (
-      <>
-        <circle cx="11" cy="11" r="7" />
-        <path d="M21 21l-4.3-4.3" />
-      </>
-    ),
-    documento: (
-      <>
-        <path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z" />
-        <path d="M14 3v5h5M9 13h6M9 17h6" />
-      </>
-    ),
-    seta: <path d="M5 12h14M13 6l6 6-6 6" />,
-  }
-
-  return (
-    <svg
-      width={tamanho}
-      height={tamanho}
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-    >
-      {formas[nome]}
-    </svg>
-  )
-}
 
 // Um campo do formulário: rótulo + input, select ou textarea.
 function Campo({
@@ -372,7 +342,7 @@ export default function ManutencaoNova() {
 
                 <div className="nm-busca-caixa" ref={caixaBuscaRef}>
                   <div className="nm-busca">
-                    <Icone nome="busca" tamanho={16} />
+                    <Search size={16} strokeWidth={2} />
 
                     <input
                       ref={inputBuscaRef}
@@ -525,7 +495,7 @@ export default function ManutencaoNova() {
                   aria-label="Últimas manutenções do equipamento"
                 >
                   <h3>
-                    <Icone nome="documento" tamanho={20} />
+                    <FileText size={20} strokeWidth={2} />
                     Últimas Manutenções
                   </h3>
 
@@ -560,7 +530,7 @@ export default function ManutencaoNova() {
                       Ver todas
 
                       <span className="nm-ver-todas-seta">
-                        <Icone nome="seta" tamanho={18} />
+                        <ArrowRight size={18} strokeWidth={2} />
                       </span>
                     </Link>
                   </div>

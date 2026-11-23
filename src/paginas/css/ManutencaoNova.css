@@ -54,7 +54,6 @@
   color: var(--marrom);
   font: inherit;
   font-size: 1rem;
-  font-style: italic;
 }
 .nm-busca:focus-within {
   border-color: var(--laranja);
@@ -119,7 +118,6 @@
   padding: 12px;
   color: #9a7a60;
   font-size: 0.9rem;
-  font-style: italic;
 }
 
 .nm-erro {
@@ -236,7 +234,6 @@
   color: var(--marrom-menu);
   font-size: 1.1rem;
   font-weight: 800;
-  font-style: italic;
 }
 
 .nm-ultimas-corpo {
@@ -269,7 +266,6 @@
 .nm-ultima-item small {
   font-size: 0.82rem;
   font-weight: 700;
-  font-style: italic;
 }
 .nm-ver-todas {
   display: inline-flex;
@@ -279,7 +275,6 @@
   color: var(--marrom-menu);
   font-size: 1.1rem;
   font-weight: 800;
-  font-style: italic;
   text-decoration: none;
 }
 
@@ -345,6 +340,35 @@
 .nm-salvar:hover {
   filter: brightness(1.08);
 }
+/* Icones */
+
+/* Centralizar ícone da busca */
+.nm-busca {
+  display: flex;
+  align-items: center;
+}
+
+/* Alinhar ícone com título */
+.nm-ultimas h3 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Centralizar seta */
+.nm-ver-todas-seta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Manter tamanho dos ícones */
+.nm-busca svg,
+.nm-ultimas h3 svg,
+.nm-ver-todas-seta svg {
+  flex-shrink: 0;
+}
+
 
 /* ---------- Responsivo ---------- */
 @media (max-width: 1000px) {
