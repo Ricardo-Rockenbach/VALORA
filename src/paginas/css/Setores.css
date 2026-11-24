@@ -51,7 +51,7 @@
 
 /* Mesmo estilo do botão "Adicionar" das outras telas */
 .st-adicionar {
-  padding: 8px 18px;
+  padding: 14px 18px;
   border: 0;
   border-radius: 5px;
   background: var(--laranja);

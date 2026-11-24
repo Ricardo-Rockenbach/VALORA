@@ -35,7 +35,7 @@ a.dash-ver-detalhes {
 }
 
 .eq-adicionar {
-  padding: 8px 18px;
+  padding: 14px 18px;
   border: 0;
   border-radius: 5px;
   background: var(--laranja);
@@ -45,7 +45,8 @@ a.dash-ver-detalhes {
   font-weight: 600;
   cursor: pointer;
   position: relative;
-  top: 12.5rem;
+  top: 13.8rem;
+  right: 10px;
 }
 a.eq-adicionar {
   display: inline-block;
@@ -165,7 +166,7 @@ a.eq-adicionar {
   min-height: 39px;
   padding: 0 13px;
   border: 1px solid #ddcec4;
-  border-radius: 8px;
+  border-radius: 5px;
   background: var(--marrom-menu);
   color: #fff;
   font: inherit;

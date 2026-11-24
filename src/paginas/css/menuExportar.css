@@ -1,0 +1,39 @@
+.menu-exportacao {
+  position: relative;
+}
+
+.menu-exportacao-botao {
+  display: flex;
+  align-items: center;
+  background: transparent;
+  border: none;
+  color: #C84E00;
+  cursor: pointer;
+}
+
+.menu-exportacao-opcoes {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  min-width: 150px;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  z-index: 100;
+}
+
+.menu-exportacao-opcoes button {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  background: transparent;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.menu-exportacao-opcoes button:hover {
+  background: #FFF0E6;
+  color: #C84E00;
+}

@@ -1,11 +1,28 @@
 import { useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { Monitor, HeartPulse, Wrench, TriangleAlert, ChartNoAxesCombined } from 'lucide-react'
+import { Monitor, HeartPulse, Wrench, TriangleAlert } from 'lucide-react'
 
 import Sidebar from '../componentes/sidebar'
+
+//graficos
+import GraficoSaude from '../componentes/graficos/saude-equipamentos'
+import GraficoVolumeManutencoes from '../componentes/graficos/volume-manutencoes'
+import GraficoTiposManutencoes from '../componentes/graficos/tipo-manutencao'
+import GraficoSaudeSetores from '../componentes/graficos/saude-setores'
+
+
+import { calcularDistribuicaoSaude, obterDataLocal, gerarSerieTemporal, calcularTiposManutencao, calcularSaudePorSetor } 
+from '../servicos/IndicadoresServico'
+
+
 import { listarEquipamentos } from '../servicos/equipamentoServico'
+
 import { listarSetores } from '../servicos/setorServico'
+
+
 import { listarManutencoes } from '../servicos/manutencaoServico'
+
+
 import { calcularSaudeEquipamento } from '../servicos/pontuacaoServico'
 
 import './css/Home.css'
@@ -48,18 +65,7 @@ function classeSaude(classificacao) {
   return 'critica'
 }
 
-function obterDataLocal(valor) {
-  if (!valor) return null
-  const texto = String(valor).slice(0, 10)
-  const partes = texto.split('-')
-  if (partes.length !== 3) return null
 
-  const [ano, mes, dia] = partes.map(Number)
-  if (!ano || !mes || !dia) return null
-
-  const data = new Date(ano, mes - 1, dia)
-  return Number.isNaN(data.getTime()) ? null : data
-}
 
 function formatarData(valor) {
   const data = obterDataLocal(valor)
@@ -84,53 +90,6 @@ function obterInicioPeriodo(periodo, hoje) {
   return inicio
 }
 
-function gerarSerieTemporal(manutencoes, periodo, hoje) {
-  const serie = []
-
-  if (periodo === '30') {
-    const inicio = new Date(hoje)
-    inicio.setHours(0, 0, 0, 0)
-    inicio.setDate(inicio.getDate() - 29)
-
-    for (let indice = 0; indice < 5; indice += 1) {
-      const dataInicio = new Date(inicio)
-      dataInicio.setDate(inicio.getDate() + indice * 6)
-      const dataFim = new Date(dataInicio)
-      dataFim.setDate(dataInicio.getDate() + 5)
-
-      const quantidade = manutencoes.filter((item) => {
-        const data = obterDataLocal(item.data)
-        return data && data >= dataInicio && data <= dataFim
-      }).length
-
-      const formatarDiaMes = (data) => data.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit' })
-      serie.push({ label: `${formatarDiaMes(dataInicio)}–${formatarDiaMes(dataFim)}`, quantidade })
-    }
-
-    return serie
-  }
-
-  const quantidadeMeses = periodo === '90' ? 3 : 6
-  const primeiroMes = new Date(hoje.getFullYear(), hoje.getMonth() - quantidadeMeses + 1, 1)
-
-  for (let indice = 0; indice < quantidadeMeses; indice += 1) {
-    const inicioMes = new Date(primeiroMes.getFullYear(), primeiroMes.getMonth() + indice, 1)
-    const proximoMes = new Date(inicioMes.getFullYear(), inicioMes.getMonth() + 1, 1)
-    const quantidade = manutencoes.filter((item) => {
-      const data = obterDataLocal(item.data)
-      return data && data >= inicioMes && data < proximoMes
-    }).length
-
-    serie.push({
-      label: inicioMes.toLocaleDateString('pt-BR', { month: 'short' }).replace('.', ''),
-      quantidade,
-    })
-  }
-
-  return serie
-}
-
-
 
 function Indicador({ icone: Icone, rotulo, valor, detalhe, cor }) {
   return (
@@ -152,47 +111,9 @@ function Estado({ children, erro = false }) {
   return <div className={`analytics-estado ${erro ? 'analytics-estado--erro' : ''}`}>{children}</div>
 }
 
-function GraficoBarras({ dados }) {
-  const maiorValor = Math.max(1, ...dados.map((item) => item.quantidade))
 
-  if (!dados.length || dados.every((item) => item.quantidade === 0)) {
-    return <div className="analytics-grafico-vazio">Não há manutenções no período selecionado.</div>
-  }
 
-  return (
-    <div className="analytics-barras" style={{ gridTemplateColumns: `repeat(${dados.length}, minmax(0, 1fr))` }} role="img" aria-label="Quantidade de manutenções por período">
-      {dados.map((item) => (
-        <div className="analytics-barra-coluna" key={item.label}>
-          <strong>{item.quantidade}</strong>
-          <div className="analytics-barra-trilho">
-            <span style={{ height: `${Math.max(5, (item.quantidade / maiorValor) * 100)}%` }} />
-          </div>
-          <small>{item.label}</small>
-        </div>
-      ))}
-    </div>
-  )
-}
 
-function DistribuicaoSaude({ dados, total }) {
-  return (
-    <div className="analytics-distribuicao">
-      {dados.map((item) => (
-        <div className="analytics-distribuicao-item" key={item.nome}>
-          <div className="analytics-distribuicao-topo">
-            <span className={`analytics-ponto analytics-ponto--${item.classe}`} />
-            <strong>{item.nome}</strong>
-            <span className="analytics-distribuicao-valor">{item.quantidade}</span>
-            <small>{formatarPercentual(total ? (item.quantidade / total) * 100 : 0)}</small>
-          </div>
-          <div className="analytics-progresso">
-            <span className={`analytics-progresso-preenchimento analytics-progresso-preenchimento--${item.classe}`} style={{ width: `${total ? (item.quantidade / total) * 100 : 0}%` }} />
-          </div>
-        </div>
-      ))}
-    </div>
-  )
-}
 
 export default function Analytics() {
   const [equipamentos, setEquipamentos] = useState([])
@@ -292,19 +213,10 @@ export default function Analytics() {
     return { totalEquipamentos, saudeMedia, emAtencao, criticos, totalManutencoes: manutencoesPeriodo.length, abertas, emAndamento, concluidas }
   }, [equipamentosFiltrados, manutencoesPeriodo])
 
-  const distribuicaoSaude = useMemo(() => {
-    const faixas = [
-      { nome: 'Excelente', classe: 'excelente', teste: (pontos) => pontos >= 90 },
-      { nome: 'Boa', classe: 'boa', teste: (pontos) => pontos >= 75 && pontos < 90 },
-      { nome: 'Atenção', classe: 'atencao', teste: (pontos) => pontos >= 50 && pontos < 75 },
-      { nome: 'Crítica', classe: 'critica', teste: (pontos) => pontos < 50 },
-    ]
-
-    return faixas.map((faixa) => ({
-      ...faixa,
-      quantidade: equipamentosFiltrados.filter((item) => faixa.teste(item.saude.pontuacao)).length,
-    }))
-  }, [equipamentosFiltrados])
+  const distribuicaoSaude = useMemo(
+  () => calcularDistribuicaoSaude(equipamentosFiltrados),
+  [equipamentosFiltrados]
+)
 
   const hojeSemHora = useMemo(() => {
     const data = new Date(hoje)
@@ -314,31 +226,15 @@ export default function Analytics() {
 
   const serieTemporal = useMemo(() => gerarSerieTemporal(manutencoesPeriodo, periodoFiltro, hojeSemHora), [manutencoesPeriodo, periodoFiltro, hojeSemHora])
 
-  const manutencoesPorTipo = useMemo(() => {
-    const grupos = new Map()
-    manutencoesPeriodo.forEach((item) => {
-      const tipo = String(item.tipoManutencao || 'Não informada').trim() || 'Não informada'
-      grupos.set(tipo, (grupos.get(tipo) || 0) + 1)
-    })
+const manutencoesPorTipo = useMemo(
+  () => calcularTiposManutencao(manutencoesPeriodo),
+  [manutencoesPeriodo]
+)
 
-    return [...grupos.entries()]
-      .map(([nome, quantidade]) => ({ nome, quantidade }))
-      .sort((a, b) => b.quantidade - a.quantidade)
-  }, [manutencoesPeriodo])
-
-  const resumoPorSetor = useMemo(() => {
-    const grupos = new Map()
-    equipamentosFiltrados.forEach((item) => {
-      const atual = grupos.get(item.setorNome) || { nome: item.setorNome, quantidade: 0, somaSaude: 0 }
-      atual.quantidade += 1
-      atual.somaSaude += item.saude.pontuacao
-      grupos.set(item.setorNome, atual)
-    })
-
-    return [...grupos.values()]
-      .map((item) => ({ ...item, saudeMedia: Math.round(item.somaSaude / item.quantidade) }))
-      .sort((a, b) => a.saudeMedia - b.saudeMedia)
-  }, [equipamentosFiltrados])
+  const resumoPorSetor = useMemo(
+    () => calcularSaudePorSetor(equipamentosFiltrados),
+    [equipamentosFiltrados]
+  )
 
   const equipamentosPrioritarios = useMemo(() => [...equipamentosFiltrados]
     .sort((a, b) => a.saude.pontuacao - b.saude.pontuacao)
@@ -448,60 +344,31 @@ export default function Analytics() {
 
             <section className="analytics-grade-graficos">
               <article className="analytics-painel">
-                <div className="analytics-painel-cabecalho">
-                  <div><h3>Distribuição da saúde</h3></div>
-                  <span className="analytics-painel-icone"><HeartPulse size={21} strokeWidth={1.8} /></span>
-                </div>
-                <DistribuicaoSaude dados={distribuicaoSaude} total={resumo.totalEquipamentos} />
-                <div className="analytics-faixas-legenda">
-                  <span>Excelente: 90–100</span><span>Boa: 75–89</span><span>Atenção: 50–74</span><span>Crítica: 0–49</span>
-                </div>
+                <GraficoSaude dados={distribuicaoSaude}
+                  titulo='Distribuição da saúde' />
               </article>
 
               <article className="analytics-painel">
-                <div className="analytics-painel-cabecalho">
-                  <div><h3>Volume de manutenções</h3></div>
-                  <span className="analytics-painel-icone"><ChartNoAxesCombined size={21} strokeWidth={1.8} /></span>
-                </div>
-                <GraficoBarras dados={serieTemporal} />
+                  <GraficoVolumeManutencoes
+                    dados={serieTemporal}
+                    titulo="Volume de manutenções"
+                  />
               </article>
             </section>
 
             <section className="analytics-grade-secundaria">
               <article className="analytics-painel">
-                <div className="analytics-painel-cabecalho">
-                  <div><h3>Tipos de manutenção</h3></div>
-                </div>
-                {manutencoesPorTipo.length ? (
-                  <div className="analytics-tipos-lista">
-                    {manutencoesPorTipo.map((item, indice) => (
-                      <div className="analytics-tipo-item" key={item.nome}>
-                        <span className={`analytics-tipo-marcador analytics-tipo-marcador--${indice % 4}`} />
-                        <span>{item.nome}</span>
-                        <strong>{item.quantidade}</strong>
-                        <small>{formatarPercentual((item.quantidade / resumo.totalManutencoes) * 100)}</small>
-                      </div>
-                    ))}
-                  </div>
-                ) : <div className="analytics-grafico-vazio">Sem manutenções para classificar neste período.</div>}
-                <div className="analytics-nota">Total considerado: {resumo.totalManutencoes} registro(s).</div>
+                  <GraficoTiposManutencoes
+                      dados={manutencoesPorTipo}
+                      titulo="Tipos de manutenção"
+                    />
               </article>
 
               <article className="analytics-painel">
-                <div className="analytics-painel-cabecalho">
-                  <div><h3>Saúde média por setor</h3></div>
-                </div>
-                {resumoPorSetor.length ? (
-                  <div className="analytics-setores-lista">
-                    {resumoPorSetor.map((item) => (
-                      <div className="analytics-setor-item" key={item.nome}>
-                        <div><strong>{item.nome}</strong><small>{item.quantidade} equipamento(s)</small></div>
-                        <div className="analytics-setor-medidor"><span style={{ width: `${item.saudeMedia}%` }} /></div>
-                        <strong className={`analytics-setor-score analytics-score--${item.saudeMedia >= 90 ? 'excelente' : item.saudeMedia >= 75 ? 'boa' : item.saudeMedia >= 50 ? 'atencao' : 'critica'}`}>{item.saudeMedia}</strong>
-                      </div>
-                    ))}
-                  </div>
-                ) : <div className="analytics-grafico-vazio">Nenhum equipamento encontrado para os filtros selecionados.</div>}
+                  <GraficoSaudeSetores
+                    dados={resumoPorSetor}
+                    titulo="Saúde média por setor"
+                  />
               </article>
             </section>
 

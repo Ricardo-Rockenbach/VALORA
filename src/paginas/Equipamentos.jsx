@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { Search, ChevronDown, CalendarDays } from "lucide-react";
+import { Search, ChevronDown} from "lucide-react";
 
 import Sidebar from '../componentes/sidebar'
 
@@ -26,12 +26,12 @@ const classeStatus = {
 
 
 
-function Filtro({ rotulo, valor, onChange, opcoes, icone }) {
+function Filtro({ rotulo, valor, onChange, opcoes }) {
   return (
     <label className="eq-filtro">
+
       <span className="eq-filtro-rotulo">
         {rotulo}
-        {icone && icone}
       </span>
 
       <select
@@ -51,29 +51,12 @@ function Filtro({ rotulo, valor, onChange, opcoes, icone }) {
       <span className="eq-filtro-seta">
         <ChevronDown size={16} />
       </span>
+
     </label>
-  );
+  )
 }
 
-function calcularDataLimite(periodo) {
-  if (!periodo) return null
 
-  const dias = {
-    'Últimos 7 dias': 7,
-    'Últimos 30 dias': 30,
-    'Últimos 12 meses': 365,
-  }
-
-  const quantidade = dias[periodo]
-
-  if (!quantidade) return null
-
-  const data = new Date()
-  data.setHours(0, 0, 0, 0)
-  data.setDate(data.getDate() - (quantidade - 1))
-
-  return data.toLocaleDateString('sv-SE')
-}
 
 export default function Equipamentos() {
   const [equipamentos, setEquipamentos] = useState([])
@@ -85,7 +68,6 @@ export default function Equipamentos() {
   const [busca, setBusca] = useState('')
   const [status, setStatus] = useState('')
   const [tipo, setTipo] = useState('')
-  const [periodo, setPeriodo] = useState('')
 
   useEffect(() => {
     async function carregarDados() {
@@ -126,12 +108,14 @@ export default function Equipamentos() {
 }, [])
 
 // Filtragem dos equipamentos
+// Filtragem dos equipamentos
 const listaFiltrada = useMemo(() => {
+
   const termo = busca.trim().toLowerCase()
-  const dataLimite = calcularDataLimite(periodo)
 
   return equipamentos
     .map((e) => {
+
       const setor = setores.find(
         (s) => Number(s.id) === Number(e.setorId)
       )
@@ -141,7 +125,9 @@ const listaFiltrada = useMemo(() => {
         setorNome: setor?.nome || 'Setor não encontrado',
       }
     })
+
     .filter((e) => {
+
       const bateStatus =
         !status || e.status === status
 
@@ -160,23 +146,14 @@ const listaFiltrada = useMemo(() => {
           String(campo ?? '').toLowerCase().includes(termo)
         )
 
-      const batePeriodo =
-        !dataLimite ||
-        (
-          e.dataAquisicao &&
-          String(e.dataAquisicao).slice(0, 10) >= dataLimite &&
-          String(e.dataAquisicao).slice(0, 10) <=
-            new Date().toLocaleDateString('sv-SE')
-        )
-
       return (
         bateStatus &&
         bateTipo &&
-        bateBusca &&
-        batePeriodo
+        bateBusca
       )
     })
-}, [equipamentos, setores, busca, status, tipo, periodo])
+
+}, [equipamentos, setores, busca, status, tipo])
 
       // Cards de resumo
       const resumo = [
@@ -253,13 +230,6 @@ const listaFiltrada = useMemo(() => {
               onChange={setStatus}
               opcoes={['Todos', 'Ativo', 'Em manutenção', 'Inativo']}
             />
-          <Filtro
-            rotulo="Período"
-            icone={<CalendarDays size={12} />}
-            valor={periodo}
-            onChange={setPeriodo}
-            opcoes={['Todos', 'Últimos 7 dias', 'Últimos 30 dias', 'Últimos 12 meses']}
-          />
 
             <button
               type="button"
@@ -268,7 +238,6 @@ const listaFiltrada = useMemo(() => {
                 setBusca('')
                 setStatus('')
                 setTipo('')
-                setPeriodo('')
               }}
             >
               Limpar filtros

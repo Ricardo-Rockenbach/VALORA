@@ -549,19 +549,7 @@
   border-radius: 0;
 }
 
-.home-distribuicao {
-  display: grid;
-  gap: 14px;
-}
 
-.home-faixa-topo {
-  display: flex;
-  align-items: center;
-  gap: 9px;
-  margin-bottom: 7px;
-}
-
-.home-faixa-ponto,
 .home-status-marcador {
   width: 9px;
   height: 9px;
@@ -569,34 +557,7 @@
   border-radius: 50%;
 }
 
-.home-faixa-ponto--excelente,
-.home-barra-preenchimento--excelente { background: #279653; }
-.home-faixa-ponto--boa,
-.home-barra-preenchimento--boa { background: #83a93b; }
-.home-faixa-ponto--atencao,
-.home-barra-preenchimento--atencao { background: #d99a27; }
-.home-faixa-ponto--critica,
-.home-barra-preenchimento--critica { background: #c6473c; }
 
-.home-faixa-topo strong {
-  color: #574333;
-  font-size: 0.83rem;
-}
-
-.home-faixa-quantidade {
-  margin-left: auto;
-  color: #49301f;
-  font-size: 0.84rem;
-  font-weight: 800;
-  font-variant-numeric: tabular-nums;
-}
-
-.home-faixa-topo small {
-  width: 38px;
-  color: #8b7b6e;
-  font-size: 0.72rem;
-  text-align: right;
-}
 
 .home-barra {
   height: 8px;
@@ -801,14 +762,14 @@
 .home-pill--atencao,
 .home-pill--manutencao,
 .home-pill--em-andamento {
-  background: #fff2d9;
+  background: transparent;
   color: #9b650b;
 }
 
 .home-pill--critica,
 .home-pill--inativo,
 .home-pill--aberta {
-  background: #fde9e7;
+  background: transparent;
   color: #b83228;
 }
 

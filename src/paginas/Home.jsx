@@ -2,7 +2,16 @@ import { useEffect, useMemo, useState } from 'react'
 
 
 import { Link } from 'react-router-dom'
+
+
 import Sidebar from '../componentes/sidebar'
+import GraficoSaude from '../componentes/graficos/saude-equipamentos'
+import GraficoResumoManutencoes from '../componentes/graficos/resumo-manutencoes'
+
+import { calcularDistribuicaoSaude, calcularResumoManutencoes, obterStatusManutencao }
+ from '../servicos/IndicadoresServico'
+
+
 import {  Boxes, Monitor, HeartPulse, CircleCheck, Wrench, TriangleAlert, ChevronRight, PackageOpen} from "lucide-react"
 
 
@@ -12,8 +21,6 @@ import { listarManutencoes } from '../servicos/manutencaoServico'
 import { calcularSaudeEquipamento } from '../servicos/pontuacaoServico'
 import './css/Home.css'
 
-// Padroniza textos para comparar status e classificações sem depender
-// de acentos, maiúsculas ou espaços excedentes.
 function normalizar(texto = '') {
   return String(texto ?? '')
     .normalize('NFD')
@@ -32,23 +39,6 @@ function formatarData(data) {
   return `${dia}/${mes}/${ano}`
 }
 
-function obterStatusManutencao(status) {
-  const valor = normalizar(status)
-
-  if (valor.includes('conclu') || valor.includes('resolvido') || valor.includes('encerrado')) {
-    return 'Concluída'
-  }
-
-  if (valor.includes('andamento') || valor.includes('atendimento')) {
-    return 'Em andamento'
-  }
-
-  if (valor.includes('abert') || !valor) {
-    return 'Aberta'
-  }
-
-  return status
-}
 
 function obterClasseStatusManutencao(status) {
   const valor = normalizar(status)
@@ -187,50 +177,15 @@ export default function Dashboard() {
     return { total: equipamentos.length, ativos, emManutencao, inativos, saudeMedia }
   }, [equipamentos, equipamentosComSaude])
 
-  // Distribuição dos equipamentos por faixa de saúde.
-  const distribuicaoSaude = useMemo(() => {
-    const faixas = [
-      { nome: 'Excelente', classe: 'excelente' },
-      { nome: 'Boa', classe: 'boa' },
-      { nome: 'Atenção', classe: 'atencao' },
-      { nome: 'Crítica', classe: 'critica' },
-    ]
+const distribuicaoSaude = useMemo(
+  () => calcularDistribuicaoSaude(equipamentosComSaude),
+  [equipamentosComSaude]
+)
 
-    return faixas.map((faixa, indice) => {
-      const quantidade = equipamentosComSaude.filter((equipamento) => {
-        const pontos = equipamento.saude.pontuacao
-        if (indice === 0) return pontos >= 90
-        if (indice === 1) return pontos >= 75 && pontos < 90
-        if (indice === 2) return pontos >= 50 && pontos < 75
-        return pontos < 50
-      }).length
-
-      return {
-        ...faixa,
-        quantidade,
-        percentual: equipamentosComSaude.length
-          ? Math.round((quantidade / equipamentosComSaude.length) * 100)
-          : 0,
-      }
-    })
-  }, [equipamentosComSaude])
-
-  // Resumo do fluxo de manutenção.
-  const resumoManutencoes = useMemo(() => {
-    const abertas = manutencoes.filter((item) => {
-      const status = obterStatusManutencao(item.status)
-      // Status não reconhecidos continuam como pendentes, assim como no Score.
-      return status !== 'Em andamento' && status !== 'Concluída'
-    }).length
-    const emAndamento = manutencoes.filter(
-      (item) => obterStatusManutencao(item.status) === 'Em andamento'
-    ).length
-    const concluidas = manutencoes.filter(
-      (item) => obterStatusManutencao(item.status) === 'Concluída'
-    ).length
-
-    return { total: manutencoes.length, abertas, emAndamento, concluidas }
-  }, [manutencoes])
+const resumoManutencoes = useMemo(
+  () => calcularResumoManutencoes(manutencoes),
+  [manutencoes]
+)
 
   // Exibe todos os ativos, priorizando os menores Scores no início da tabela.
   const equipamentosOrdenados = useMemo(() => {
@@ -337,97 +292,28 @@ export default function Dashboard() {
 
             <section className="home-paineis-resumo">
               <article className="home-painel home-painel-saude">
-                <div className="home-painel-cabecalho">
-                  <div>
-                    <h3>Saúde dos equipamentos</h3>
-                  </div>
-                  <span className="home-painel-icone"></span>
-                </div>
 
-                <div className="home-distribuicao">
-                  {distribuicaoSaude.map((faixa) => (
-                    <div className="home-faixa" key={faixa.nome}>
-                      <div className="home-faixa-topo">
-                        <span className={`home-faixa-ponto home-faixa-ponto--${faixa.classe}`} />
-                        <strong>{faixa.nome}</strong>
-                        <span className="home-faixa-quantidade">{faixa.quantidade}</span>
-                        <small>{faixa.percentual}%</small>
-                      </div>
-                      <div
-                        className="home-barra"
-                        role="progressbar"
-                        aria-label={`${faixa.nome}: ${faixa.quantidade} equipamentos`}
-                        aria-valuemin={0}
-                        aria-valuemax={100}
-                        aria-valuenow={faixa.percentual}
-                      >
-                        <span
-                          className={`home-barra-preenchimento home-barra-preenchimento--${faixa.classe}`}
-                          style={{ width: `${faixa.percentual}%` }}
-                        />
-                      </div>
-                    </div>
-                  ))}
-                </div>
-
-                <div className="home-legenda-score">
-                  <span className="home-legenda-titulo">
-                    Classificação da saúde
-                  </span>
-
-                  <div className="home-legenda-faixas">
-                    <div className="home-legenda-item">
-                      <span>Excelente</span>
-                      <span>90–100</span>
-                    </div>
-
-                    <div className="home-legenda-item">
-                      <span>Boa</span>
-                      <span>75–89</span>
-                    </div>
-
-                    <div className="home-legenda-item">
-                      <span>Atenção</span>
-                      <span>50–74</span>
-                    </div>
-
-                    <div className="home-legenda-item">
-                      <span>Crítica</span>
-                      <span>0–49</span>
-                    </div>
-                  </div>
-                </div>
+                <GraficoSaude dados={distribuicaoSaude} />
               </article>
-
               <article className="home-painel home-painel-manutencao">
+
                 <div className="home-painel-cabecalho">
+
                   <div>
                     <h3>Resumo das manutenções</h3>
                   </div>
-                  <Link to="/manutencoes" className="home-link-painel">Ver todas <ChevronRight size={16} /></Link>
+
+                  <Link
+                    to="/manutencoes"
+                    className="home-link-painel"
+                  >
+                    Ver todas <ChevronRight size={16} />
+                  </Link>
+
                 </div>
 
-                <div className="home-manutencao-total">
-                  <span>Total de registros</span>
-                  <strong>{resumoManutencoes.total}</strong>
-                </div>
-                <div className="home-manutencao-status">
-                  <div>
-                    <span className="home-status-marcador home-status-marcador--aberta" />
-                    <span>Abertas</span>
-                    <strong>{resumoManutencoes.abertas}</strong>
-                  </div>
-                  <div>
-                    <span className="home-status-marcador home-status-marcador--andamento" />
-                    <span>Em andamento</span>
-                    <strong>{resumoManutencoes.emAndamento}</strong>
-                  </div>
-                  <div>
-                    <span className="home-status-marcador home-status-marcador--concluida" />
-                    <span>Concluídas</span>
-                    <strong>{resumoManutencoes.concluidas}</strong>
-                  </div>
-                </div>
+                <GraficoResumoManutencoes dados={resumoManutencoes} />
+
               </article>
             </section>
 

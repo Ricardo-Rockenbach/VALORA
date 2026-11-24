@@ -1,0 +1,36 @@
+.grafico-cabecalho {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.grafico-cabecalho h3 {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 700;
+  color: #514438;
+}
+
+.grafico-exportar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 32px;
+  height: 32px;
+
+  background: transparent;
+  border: none;
+  border-radius: 5px;
+
+  color: #C84E00;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.grafico-exportar:hover {
+  background: #FFF0E6;
+}
+
